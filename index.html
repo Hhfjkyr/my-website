@@ -1,523 +1,132 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
-<head>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XNXX - مقاطع الفيديو</title>
+  <title>موقعي العالمي</title>
   <style>
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+      font-family: 'Tahoma', sans-serif;
+    }body {
+  background: linear-gradient(to bottom, #001f4d, #003366);
+  color: white;
+}
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #021B79, #0575E6);
-      color: #fff;
-      min-height: 100vh;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .navbar {
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.3);
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-    }
-
-    .navbar h1 {
-      font-size: 28px;
-      color: #ffd700;
-      letter-spacing: 1px;
-    }
-
-    .navbar button {
-      background-color: #ffd700;
-      border: none;
-      padding: 10px 24px;
-      font-size: 16px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .navbar button:hover {
-      background-color: #fff176;
-    }
-
-    .welcome {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(to bottom right, #003B73, #0059b3);
-      text-align: center;
-      padding: 20px;
-    }
-
-    .big-x {
-      font-size: 160px;
-      font-weight: bold;
-      color: white;
-      animation: pulse 2s infinite;
-      text-shadow: 0 0 25px white;
-    }
-
-    .label {
-      font-size: 36px;
-      color: #ffd700;
-      margin-top: 10px;
-      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    .enter-btn {
-      margin-top: 40px;
-      padding: 14px 40px;
-      font-size: 20px;
-      background-color: #ffd700;
-      color: #000;
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      transition: background-color 0.3s;
-    }
-
-    .enter-btn:hover {
-      background-color: #ffeb3b;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        text-shadow: 0 0 20px white;
-      }
-
-      50% {
-        text-shadow: 0 0 40px gold;
-      }
-    }
-
-    #mainContent {
-      display: none;
-      padding: 120px 20px 60px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    h2 {
-      font-size: 36px;
-      margin-bottom: 30px;
-      color: #ffd700;
-      text-align: center;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .video-card {
-      background-color: rgba(0, 0, 0, 0.3);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .video-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    }
-
-    video {
-      width: 100%;
-      display: block;
-    }
-
-    .video-title {
-      padding: 12px;
-      font-size: 18px;
-      background-color: #002d59;
-      color: #ffd700;
-      text-align: center;
-    }
-
-    img {
-      width: 100%;
-      border-radius: 16px;
-      margin-top: 20px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- واجهة البداية -->
-  <div class="welcome" id="welcomeScreen">
-    <div class="big-x">X</div>
-    <div class="label">XNXX</div>
-    <button class="enter-btn" onclick="enterSite()">دخول</button>
-  </div>
-
-  <!-- شريط التنقل -->
-  <div class="navbar" id="navbar" style="display: none;">
-    <h1>XNXX</h1>
-    <button onclick="scrollToVideos()">عرض المقاطع</button>
-  </div>
-
-  <!-- المحتوى -->
-  <div id="mainContent">
-    <h2>مقاطع الفيديو</h2>
-    <div class="video-grid">
-      <div class="video-card">
-        <video controls>
-          <source src="https://hhfjkyr.github.io/my-website/VID_20250421_163803_350.mp4" type="video/mp4">
-          المتصفح لا يدعم تشغيل الفيديو.
-        </video>
-        <div class="video-title">مقطع 1</div>
-      </div>
-
-      <div class="video-card">
-        <video controls>
-          <source src="https://hhfjkyr.github.io/my-website/VID_20250421_163803_350.mp4" type="video/mp4">
-          المتصفح لا يدعم تشغيل الفيديو.
-        </video>
-        <div class="video-title">مقطع 2</div>
-      </div>
-
-      <div class="video-card">
-        <video controls>
-          <source src="https://hhfjkyr.github.io/my-website/VID_20250421_163803_350.mp4" type="video/mp4">
-          المتصفح لا يدعم تشغيل الفيديو.
-        </video>
-        <div class="video-title">مقطع 3</div>
-      </div>
-    </div>
-
-    <h2>صورة مرفوعة</h2>
-    <img src="https://hhfjkyr.github.io/my-website/٢٠٢٥٠٤٢١_١٧٠٢٢٦.jpg" alt="صورة مرفوعة">
-  </div>
-
-  <script>
-    function enterSite() {
-      document.getElementById("welcomeScreen").style.display = "none";
-      document.getElementById("mainContent").style.display = "block";
-      document.getElementById("navbar").style.display = "flex";
-    }
-
-    function scrollToVideos() {
-      window.scrollTo({
-        top: document.getElementById("mainContent").offsetTop - 80,
-        behavior: 'smooth'
-      });
-    }
-  </script>
-
-</body>
-  <!-- حقوق النشر -->
-<footer style="text-align: center; padding: 30px 10px; background-color: rgba(0,0,0,0.2); margin-top: 60px; color: #ccc; font-size: 14px; direction: rtl;">
-  <p style="margin-bottom: 8px;">جميع الحقوق محفوظة &copy; 2025 - XNXX</p>
-  <p style="margin: 0; display: flex; justify-content: center; align-items: center; gap: 8px;">
-    تصميم وتطوير بواسطة 
-    <a href="https://www.instagram.com/_ci7z" target="_blank" style="color: #ffd700; text-decoration: none; display: flex; align-items: center; gap: 5px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 18px; height: 18px; border-radius: 4px;">
-      @_ci7z
-    </a>
-  </p>
-</footer>
-
-</html>
-<!DOCTYPE html><html lang="ar" dir="rtl"><head>
-  <meta charset="UTF-8">
-  <title>لوحة التحكم</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #f0f0f0;
-      padding: 30px;
-    }
-    .admin {
-      display: none;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .video-list {
-      margin-top: 20px;
-    }
-    .video-item {
-      background: #eee;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    button {
-      padding: 8px 16px;
-      border: none;
-      border-radius: 5px;
-      background: #333;
-      color: #fff;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #555;
-    }
-  </style>
-</head><body>
-  <h2>أدخل كلمة المرور لعرض لوحة التحكم</h2>
-  <input type="password" id="adminPass" placeholder="كلمة المرور">
-  <button onclick="checkPassword()">دخول</button>  <div class="admin" id="adminPanel">
-    <h2>لوحة التحكم</h2>
-    <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
-    <input type="text" id="videoUrl" placeholder="رابط الفيديو">
-    <button onclick="addVideo()">إضافة فيديو</button><div class="video-list" id="videoList"></div>
-
-  </div>  <script>
-    const correctPass = "12345"; // غيرها إلى كلمة سر سرية لك فقط
-
-    function checkPassword() {
-      const input = document.getElementById("adminPass").value;
-      if (input === correctPass) {
-        document.getElementById("adminPanel").style.display = "block";
-      } else {
-        alert("كلمة المرور خاطئة");
-      }
-    }
-
-    function addVideo() {
-      const title = document.getElementById("videoTitle").value;
-      const url = document.getElementById("videoUrl").value;
-      const list = document.getElementById("videoList");
-
-      const item = document.createElement("div");
-      item.className = "video-item";
-      item.innerHTML = `
-        <div>
-          <strong>${title}</strong><br>
-          <video controls width="300"><source src="${url}" type="video/mp4"></video>
-        </div>
-        <button onclick="this.parentElement.remove()">حذف</button>
-      `;
-      list.appendChild(item);
-    }
-  </script></body></html>
-<!DOCTYPE html><html lang="ar" dir="rtl"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>موقعي</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }.navbar {
-  background-color: #333;
-  color: #fff;
-  padding: 15px;
+header {
+  background-color: #000;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 0 15px #000;
 }
 
-.navbar button {
-  background-color: #555;
-  color: white;
-  border: none;
+header h1 {
+  color: #ffcc00;
+  font-size: 32px;
+}
+
+.btn {
+  background-color: #ffcc00;
+  color: #000;
   padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.admin-panel {
-  display: none;
-  padding: 20px;
-  background-color: #fff3cd;
-  border: 1px solid #ffeeba;
-  margin: 20px;
+.btn:hover {
+  background-color: #e6b800;
 }
 
-.login-form {
-  display: none;
-  padding: 20px;
-  background-color: #e2e3e5;
-  margin: 20px;
+main {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #ffcc00;
+  text-shadow: 2px 2px 8px #000;
+}
+
+.video-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.video-card {
+  background-color: #111;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+}
+
+.video-card video {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.video-card h3 {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #ffcc00;
+}
+
+footer {
+  background-color: #000;
+  padding: 15px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.footer-text {
+  color: #ccc;
+  font-size: 14px;
+}
+
+.footer-text a {
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
 }
 
   </style>
 </head><body>
-  <div class="navbar">
-    <h1>موقعي</h1>
-    <button onclick="toggleLogin()">تسجيل دخول</button>
-  </div>  <div class="login-form" id="loginForm">
-    <h3>تسجيل الدخول كمدير</h3>
-    <input type="email" id="email" placeholder="البريد الإلكتروني"><br><br>
-    <input type="password" id="password" placeholder="كلمة المرور"><br><br>
-    <button onclick="login()">دخول</button>
-  </div>  <div class="admin-panel" id="adminPanel">
-    <h2>لوحة الإدارة</h2>
-    <p>مرحباً بك! يمكنك الآن إضافة أو حذف مقاطع الفيديو.</p>
-    <!-- أزرار وتحكمات إدارية هنا -->
-    <button>إضافة مقطع</button>
-    <button>حذف مقطع</button>
-  </div>  <script>
-    function toggleLogin() {
-      const form = document.getElementById("loginForm");
-      form.style.display = form.style.display === "none" ? "block" : "none";
-    }
+  <header>
+    <h1>XNXX</h1>
+    <button class="btn" onclick="scrollToVideos()">عرض المقاطع</button>
+  </header>  <main>
+    <h2>مقاطع الفيديو</h2>
+    <div class="video-gallery" id="videos">
+      <div class="video-card">
+        <video controls>
+          <source src="video1.mp4" type="video/mp4">
+        </video>
+        <h3>مقطع 1</h3>
+      </div><div class="video-card">
+    <video controls>
+      <source src="video2.mp4" type="video/mp4">
+    </video>
+    <h3>مقطع 2</h3>
+  </div>
 
-    function login() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+  <!-- أضف المزيد من المقاطع حسب رغبتك -->
+</div>
 
-      if (email === "hhhhhakms@gmail.com" && password === "12345") {
-        document.getElementById("adminPanel").style.display = "block";
-        document.getElementById("loginForm").style.display = "none";
-        alert("تم تسجيل الدخول بنجاح!");
-      } else {
-        alert("بيانات غير صحيحة!");
-      }
+  </main>  <footer>
+    <p class="footer-text">حقوق التصميم محفوظة &copy; 2025 بواسطة <a href="https://instagram.com/_ci7z" target="_blank">@_ci7z</a> - تصميم احترافي بمستوى عالمي</p>
+  </footer>  <script>
+    function scrollToVideos() {
+      document.getElementById("videos").scrollIntoView({ behavior: "smooth" });
     }
   </script></body></html>
-<!DOCTYPE html><html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>موقعي</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #003B73, #0059b3);
-      color: white;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #002b5c;
-      padding: 10px 20px;
-    }
-    .login-btn {
-      background-color: #ffcc00;
-      border: none;
-      padding: 10px 15px;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .admin-panel {
-      display: none;
-      background-color: #ffffff10;
-      margin: 20px;
-      padding: 20px;
-      border-radius: 10px;
-    }
-    .video-box {
-      background: #00000060;
-      margin: 20px;
-      padding: 10px;
-      border-radius: 10px;
-    }
-    .footer {
-      text-align: center;
-      padding: 10px;
-      margin-top: 30px;
-      background: #001f3f;
-    }
-    .insta-link {
-      color: #ffcc00;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h2>XNXX</h2>
-    <button class="login-btn" onclick="toggleLogin()">تسجيل الدخول</button>
-  </header>  <div id="loginForm" style="display:none; padding: 20px;">
-    <input type="email" id="email" placeholder="البريد الإلكتروني"><br><br>
-    <input type="password" id="password" placeholder="كلمة المرور"><br><br>
-    <button onclick="login()">دخول</button>
-  </div>  <div class="video-box">
-    <h3>مقطع 1</h3>
-    <video width="100%" controls>
-      <source src="video1.mp4" type="video/mp4">
-    </video>
-  </div>  <div class="admin-panel" id="adminPanel">
-    <h3>لوحة التحكم (أدمن)</h3>
-    <button onclick="alert('نشر مقطع')">نشر مقطع</button>
-    <button onclick="alert('حذف مقطع')">حذف مقطع</button>
-    <button onclick="alert('تعديل مقطع')">تعديل مقطع</button>
-  </div>  <div class="footer">
-    تصميم احترافي بواسطة <a href="https://instagram.com/_ci7z" class="insta-link" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 20px; vertical-align: middle;"> @_ci7z
-    </a>
-  </div>  <script>
-    function toggleLogin() {
-      const form = document.getElementById('loginForm');
-      form.style.display = form.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function login() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      if (email === 'hhhhhakms@gmail.com' && password === '12345') {
-        document.getElementById('adminPanel').style.display = 'block';
-        alert('تم تسجيل الدخول بنجاح!');
-      } else {
-        alert('بيانات الدخول غير صحيحة.');
-      }
-    }
-  </script></body>
-</html>
-<!-- زر نشر مقطع -->
-<button onclick="document.getElementById('uploadInput').click()">نشر مقطع</button>
-<input type="file" id="uploadInput" accept="video/*,image/*" style="display: none;" onchange="handleUpload(event)">
-
-<!-- مكان عرض المقطع بعد الرفع -->
-<div id="mediaContainer"></div>
-
-<script>
-  function handleUpload(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const container = document.getElementById('mediaContainer');
-    container.innerHTML = ''; // حذف المحتوى السابق
-
-    const url = URL.createObjectURL(file);
-
-    if (file.type.startsWith('video/')) {
-      const video = document.createElement('video');
-      video.src = url;
-      video.controls = true;
-      video.style.width = '100%';
-      container.appendChild(video);
-    } else if (file.type.startsWith('image/')) {
-      const img = document.createElement('img');
-      img.src = url;
-      img.style.width = '100%';
-      container.appendChild(img);
-    }
-  }
-</script>
