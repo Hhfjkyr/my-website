@@ -319,3 +319,80 @@
       list.appendChild(item);
     }
   </script></body></html>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>موقعي</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar button {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.admin-panel {
+  display: none;
+  padding: 20px;
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  margin: 20px;
+}
+
+.login-form {
+  display: none;
+  padding: 20px;
+  background-color: #e2e3e5;
+  margin: 20px;
+}
+
+  </style>
+</head><body>
+  <div class="navbar">
+    <h1>موقعي</h1>
+    <button onclick="toggleLogin()">تسجيل دخول</button>
+  </div>  <div class="login-form" id="loginForm">
+    <h3>تسجيل الدخول كمدير</h3>
+    <input type="email" id="email" placeholder="البريد الإلكتروني"><br><br>
+    <input type="password" id="password" placeholder="كلمة المرور"><br><br>
+    <button onclick="login()">دخول</button>
+  </div>  <div class="admin-panel" id="adminPanel">
+    <h2>لوحة الإدارة</h2>
+    <p>مرحباً بك! يمكنك الآن إضافة أو حذف مقاطع الفيديو.</p>
+    <!-- أزرار وتحكمات إدارية هنا -->
+    <button>إضافة مقطع</button>
+    <button>حذف مقطع</button>
+  </div>  <script>
+    function toggleLogin() {
+      const form = document.getElementById("loginForm");
+      form.style.display = form.style.display === "none" ? "block" : "none";
+    }
+
+    function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (email === "hhhhhakms@gmail.com" && password === "12345") {
+        document.getElementById("adminPanel").style.display = "block";
+        document.getElementById("loginForm").style.display = "none";
+        alert("تم تسجيل الدخول بنجاح!");
+      } else {
+        alert("بيانات غير صحيحة!");
+      }
+    }
+  </script></body></html>
