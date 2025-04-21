@@ -125,57 +125,91 @@
       text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
 
-    .media-card {
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .video-card {
       background-color: rgba(0, 0, 0, 0.3);
       border-radius: 16px;
       overflow: hidden;
-      margin-bottom: 40px;
-      padding: 16px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .video-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    video {
+      width: 100%;
+      display: block;
+    }
+
+    .video-title {
+      padding: 12px;
+      font-size: 18px;
+      background-color: #002d59;
+      color: #ffd700;
       text-align: center;
     }
 
-    video, img {
+    img {
       width: 100%;
-      border-radius: 10px;
-      margin-bottom: 12px;
-    }
-
-    .media-title {
-      font-size: 20px;
-      color: #ffd700;
+      border-radius: 16px;
+      margin-top: 20px;
     }
   </style>
 </head>
 
 <body>
 
+  <!-- واجهة البداية -->
   <div class="welcome" id="welcomeScreen">
     <div class="big-x">X</div>
     <div class="label">XNXX</div>
     <button class="enter-btn" onclick="enterSite()">دخول</button>
   </div>
 
+  <!-- شريط التنقل -->
   <div class="navbar" id="navbar" style="display: none;">
     <h1>XNXX</h1>
     <button onclick="scrollToVideos()">عرض المقاطع</button>
   </div>
 
+  <!-- المحتوى -->
   <div id="mainContent">
-    <h2>محتوى الموقع</h2>
+    <h2>مقاطع الفيديو</h2>
+    <div class="video-grid">
+      <div class="video-card">
+        <video controls>
+          <source src="https://hhfjkyr.github.io/my-website/VID_20250421_163803_350.mp4" type="video/mp4">
+          المتصفح لا يدعم تشغيل الفيديو.
+        </video>
+        <div class="video-title">مقطع 1</div>
+      </div>
 
-    <div class="media-card">
-      <video controls>
-        <source src="VID_20250421_163803_350.mp4" type="video/mp4">
-        متصفحك لا يدعم عرض الفيديو.
-      </video>
-      <div class="media-title">فيديو مرفوع</div>
+      <div class="video-card">
+        <video controls>
+          <source src="https://hhfjkyr.github.io/my-website/VID_20250421_163803_350.mp4" type="video/mp4">
+          المتصفح لا يدعم تشغيل الفيديو.
+        </video>
+        <div class="video-title">مقطع 2</div>
+      </div>
+
+      <div class="video-card">
+        <video controls>
+          <source src="https://hhfjkyr.github.io/my-website/VID_20250421_163803_350.mp4" type="video/mp4">
+          المتصفح لا يدعم تشغيل الفيديو.
+        </video>
+        <div class="video-title">مقطع 3</div>
+      </div>
     </div>
 
-    <div class="media-card">
-      <img src="٢٠٢٥٠٤٢١_١٧٠٢٢٦.jpg" alt="صورة مرفوعة">
-      <div class="media-title">صورة مرفوعة</div>
-    </div>
-
+    <h2>صورة مرفوعة</h2>
+    <img src="https://hhfjkyr.github.io/my-website/٢٠٢٥٠٤٢١_١٧٠٢٢٦.jpg" alt="صورة مرفوعة">
   </div>
 
   <script>
