@@ -396,3 +396,128 @@
       }
     }
   </script></body></html>
+<!DOCTYPE html><html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>موقعي</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #003B73, #0059b3);
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #002b5c;
+      padding: 10px 20px;
+    }
+    .login-btn {
+      background-color: #ffcc00;
+      border: none;
+      padding: 10px 15px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .admin-panel {
+      display: none;
+      background-color: #ffffff10;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .video-box {
+      background: #00000060;
+      margin: 20px;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .footer {
+      text-align: center;
+      padding: 10px;
+      margin-top: 30px;
+      background: #001f3f;
+    }
+    .insta-link {
+      color: #ffcc00;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>XNXX</h2>
+    <button class="login-btn" onclick="toggleLogin()">تسجيل الدخول</button>
+  </header>  <div id="loginForm" style="display:none; padding: 20px;">
+    <input type="email" id="email" placeholder="البريد الإلكتروني"><br><br>
+    <input type="password" id="password" placeholder="كلمة المرور"><br><br>
+    <button onclick="login()">دخول</button>
+  </div>  <div class="video-box">
+    <h3>مقطع 1</h3>
+    <video width="100%" controls>
+      <source src="video1.mp4" type="video/mp4">
+    </video>
+  </div>  <div class="admin-panel" id="adminPanel">
+    <h3>لوحة التحكم (أدمن)</h3>
+    <button onclick="alert('نشر مقطع')">نشر مقطع</button>
+    <button onclick="alert('حذف مقطع')">حذف مقطع</button>
+    <button onclick="alert('تعديل مقطع')">تعديل مقطع</button>
+  </div>  <div class="footer">
+    تصميم احترافي بواسطة <a href="https://instagram.com/_ci7z" class="insta-link" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 20px; vertical-align: middle;"> @_ci7z
+    </a>
+  </div>  <script>
+    function toggleLogin() {
+      const form = document.getElementById('loginForm');
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      if (email === 'hhhhhakms@gmail.com' && password === '12345') {
+        document.getElementById('adminPanel').style.display = 'block';
+        alert('تم تسجيل الدخول بنجاح!');
+      } else {
+        alert('بيانات الدخول غير صحيحة.');
+      }
+    }
+  </script></body>
+</html>
+<!-- زر نشر مقطع -->
+<button onclick="document.getElementById('uploadInput').click()">نشر مقطع</button>
+<input type="file" id="uploadInput" accept="video/*,image/*" style="display: none;" onchange="handleUpload(event)">
+
+<!-- مكان عرض المقطع بعد الرفع -->
+<div id="mediaContainer"></div>
+
+<script>
+  function handleUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const container = document.getElementById('mediaContainer');
+    container.innerHTML = ''; // حذف المحتوى السابق
+
+    const url = URL.createObjectURL(file);
+
+    if (file.type.startsWith('video/')) {
+      const video = document.createElement('video');
+      video.src = url;
+      video.controls = true;
+      video.style.width = '100%';
+      container.appendChild(video);
+    } else if (file.type.startsWith('image/')) {
+      const img = document.createElement('img');
+      img.src = url;
+      img.style.width = '100%';
+      container.appendChild(img);
+    }
+  }
+</script>
