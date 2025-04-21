@@ -315,7 +315,112 @@
           <video controls width="300"><source src="${url}" type="video/mp4"></video>
         </div>
         <button onclick="this.parentElement.remove()">حذف</button>
+  
       `;
       list.appendChild(item);
     }
   </script></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>موقعي</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      margin: 0;
+    }
+
+    .navbar {
+      background: #222;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-panel {
+      display: none;
+      background: #fff;
+      padding: 20px;
+      margin: 20px;
+      border: 2px solid #444;
+      border-radius: 10px;
+    }
+
+    .login-form {
+      display: none;
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      z-index: 1000;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      border-radius: 8px;
+    }
+
+    .login-form input {
+      display: block;
+      margin-bottom: 10px;
+      padding: 8px;
+      width: 200px;
+    }
+
+    .login-form button {
+      padding: 8px 12px;
+      background: #222;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .login-form button:hover {
+      background: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <h3>موقعي</h3>
+    <button onclick="toggleLogin()">تسجيل الدخول</button>
+  </div>
+
+  <div class="login-form" id="loginForm">
+    <input type="email" id="email" placeholder="البريد الإلكتروني">
+    <input type="password" id="password" placeholder="كلمة المرور">
+    <button onclick="login()">دخول</button>
+  </div>
+
+  <div class="admin-panel" id="adminPanel">
+    <h2>لوحة الإدارة</h2>
+    <p>مرحباً، لديك صلاحيات كاملة لإدارة الموقع.</p>
+    <!-- أضف هنا أدوات مثل رفع أو حذف المقاطع -->
+  </div>
+
+  <script>
+    function toggleLogin() {
+      const form = document.getElementById('loginForm');
+      form.style.display = form.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (email === 'hhhhhakms@gmail.com' && password === '12345') {
+        document.getElementById('adminPanel').style.display = 'block';
+        document.getElementById('loginForm').style.display = 'none';
+        alert("تم تسجيل الدخول كمدير.");
+      } else {
+        alert("بيانات الدخول غير صحيحة.");
+      }
+    }
+  </script>
+
+</body>
+</html>
