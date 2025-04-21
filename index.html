@@ -1,132 +1,541 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>موقعي العالمي</title>
+  <title>معرض الفيديو والصور</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Tahoma', sans-serif;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #1f2a40, #3c5e8a);
+      color: #fff;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: #ffd700;
+      letter-spacing: 1px;
+    }
+
+    .main-content {
+      padding: 60px 20px 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2.section-title {
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #ffd700;
+      border-bottom: 2px solid #ffd700;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .card video,
+    .card img {
+      width: 100%;
+      display: block;
+    }
+
+    .card .caption {
+      padding: 12px;
+      font-size: 18px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.4);
+      color: #ffd700;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>معرض الوسائط</h1>
+  </header>
+
+  <div class="main-content">
+    <h2 class="section-title">المقاطع</h2>
+    <div class="grid">
+      <div class="card">
+        <video controls>
+          <source src="video1.mp4" type="video/mp4">
+          متصفحك لا يدعم تشغيل الفيديو.
+        </video>
+        <div class="caption">مقطع 1</div>
+      </div>
+
+      <div class="card">
+        <video controls>
+          <source src="video2.mp4" type="video/mp4">
+          متصفحك لا يدعم تشغيل الفيديو.
+        </video>
+        <div class="caption">مقطع 2</div>
+      </div>
+
+      <div class="card">
+        <video controls>
+          <source src="video3.mp4" type="video/mp4">
+          متصفحك لا يدعم تشغيل الفيديو.
+        </video>
+        <div class="caption">مقطع 3</div>
+      </div>
+    </div>
+    <h2 class="section-title" style="margin-top: 80px;">الصور</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="٢٠٢٥٠٤٢١_١٧٠٢٢٦.jpg" alt="صورة 1">
+        <div class="caption">صورة 1</div>
+      </div>
+
+      <div class="card">
+        <img src="image2.jpg" alt="صورة 2">
+        <div class="caption">صورة 2</div>
+      </div>
+
+      <div class="card">
+        <img src="image3.jpg" alt="صورة 3">
+        <div class="caption">صورة 3</div>
+      </div>
+    </div>
+  </div>
+
+  <footer style="margin-top: 100px; background-color: #111; text-align: center; padding: 30px;">
+    <div style="font-size: 18px; margin-bottom: 10px;">جميع الحقوق محفوظة &copy; 2025</div>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 10px; color: #fff;">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" width="24" height="24">
+      <a href="https://instagram.com/_ci7z" target="_blank" style="color: #ffd700; font-size: 18px;">@_ci7z</a>
+    </div>
+    <p style="color: #ccc; margin-top: 15px; font-size: 14px;">
+      تصميم احترافي بإبداع عربي، واجهة بسيطة، أداء عالي، تجربة مميزة للمستخدم
+    </p>
+  </footer>
+
+</body>
+</html>
+<style>
+    /* تحسينات عامة */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background-color: #001a33;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+
+    .card img, .card video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .caption {
+      padding: 12px;
+      background: #002f5f;
+      color: #ffd700;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-size: 36px;
+      color: #ffd700;
+      margin-top: 80px;
+      text-shadow: 1px 1px 5px #000;
+      text-align: center;
+    }
+
+    footer img {
+      filter: brightness(1.2);
+    }
+
+    /* مظهر متجاوب */
+    @media (max-width: 600px) {
+      .welcome .big-x {
+        font-size: 120px;
+      }
+
+      .welcome .label {
+        font-size: 28px;
+      }
+
+      .navbar h1 {
+        font-size: 22px;
+      }
+
+      .navbar button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+
+      .enter-btn {
+        padding: 12px 30px;
+        font-size: 18px;
+      }
+    }
+</style>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XNXX - موقع الفيديوهات</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
     }body {
-  background: linear-gradient(to bottom, #001f4d, #003366);
-  color: white;
+  font-family: 'Cairo', sans-serif;
+  background: linear-gradient(145deg, #001233, #003566);
+  color: #fff;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 header {
-  background-color: #000;
-  padding: 20px;
+  background-color: #000c2b;
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0 15px #000;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 header h1 {
-  color: #ffcc00;
-  font-size: 32px;
+  font-size: 30px;
+  color: #ffd700;
+  letter-spacing: 1px;
 }
 
-.btn {
-  background-color: #ffcc00;
-  color: #000;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #e6b800;
-}
-
-main {
-  padding: 40px 20px;
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #002244, #004488);
   text-align: center;
+  padding: 20px;
 }
 
-h2 {
+.hero .title {
+  font-size: 120px;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 0 25px white;
+  animation: glow 2s infinite;
+}
+
+.hero .subtitle {
   font-size: 32px;
-  margin-bottom: 30px;
-  color: #ffcc00;
-  text-shadow: 2px 2px 8px #000;
+  color: #ffd700;
+  margin-top: 20px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
 }
 
-.video-gallery {
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
+  padding: 80px 40px;
+  max-width: 1400px;
+  margin: auto;
 }
 
-.video-card {
-  background-color: #111;
-  padding: 15px;
-  border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+.card {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.video-card video {
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+}
+
+.card img, .card video {
   width: 100%;
-  border-radius: 10px;
+  height: auto;
 }
 
-.video-card h3 {
-  margin-top: 10px;
+.caption {
+  padding: 12px;
+  background-color: #002f5f;
+  color: #ffd700;
   font-size: 18px;
-  color: #ffcc00;
+  text-align: center;
 }
 
 footer {
-  background-color: #000;
-  padding: 15px;
-  text-align: center;
-  margin-top: 50px;
-}
-
-.footer-text {
+  background: #000;
   color: #ccc;
-  font-size: 14px;
+  padding: 30px 20px;
+  text-align: center;
 }
 
-.footer-text a {
-  color: #ffcc00;
-  text-decoration: none;
-  font-weight: bold;
+footer .social {
+  margin-top: 10px;
 }
 
-.footer-text a:hover {
-  text-decoration: underline;
+footer .social a {
+  margin: 0 10px;
+  color: #ffd700;
+  font-size: 24px;
+}
+
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 20px white; }
+  50% { text-shadow: 0 0 40px gold; }
+}
+
+@media (max-width: 600px) {
+  .hero .title {
+    font-size: 80px;
+  }
+  .hero .subtitle {
+    font-size: 24px;
+  }
+  header h1 {
+    font-size: 20px;
+  }
 }
 
   </style>
 </head><body>
   <header>
     <h1>XNXX</h1>
-    <button class="btn" onclick="scrollToVideos()">عرض المقاطع</button>
-  </header>  <main>
-    <h2>مقاطع الفيديو</h2>
-    <div class="video-gallery" id="videos">
-      <div class="video-card">
-        <video controls>
-          <source src="video1.mp4" type="video/mp4">
-        </video>
-        <h3>مقطع 1</h3>
-      </div><div class="video-card">
-    <video controls>
-      <source src="video2.mp4" type="video/mp4">
-    </video>
-    <h3>مقطع 2</h3>
-  </div>
-
-  <!-- أضف المزيد من المقاطع حسب رغبتك -->
+  </header>  <section class="hero">
+    <div class="title">X</div>
+    <div class="subtitle">أهلاً بك في عالم الفيديو</div>
+  </section>  <h2 class="section-title">المعرض</h2>
+  <div class="grid">
+    <div class="card">
+      <video controls>
+        <source src="VID_20250421_163803_350.mp4" type="video/mp4">
+      </video>
+      <div class="caption">مقطع مميز</div>
+    </div><div class="card">
+  <img src="٢٠٢٥٠٤٢١_١٧٠٢٢٦.jpg" alt="صورة رائعة">
+  <div class="caption">صورة منشورة</div>
 </div>
 
-  </main>  <footer>
-    <p class="footer-text">حقوق التصميم محفوظة &copy; 2025 بواسطة <a href="https://instagram.com/_ci7z" target="_blank">@_ci7z</a> - تصميم احترافي بمستوى عالمي</p>
-  </footer>  <script>
-    function scrollToVideos() {
-      document.getElementById("videos").scrollIntoView({ behavior: "smooth" });
-    }
-  </script></body></html>
+  </div>  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2025</p>
+    <div class="social">
+      <a href="https://instagram.com/_ci7z" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" width="24" height="24">
+      </a>
+    </div>
+    <p>تم التصميم باحترافية لتقديم أفضل تجربة</p>
+  </footer>
+</body>
+</html>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XNXX - معرض الوسائط</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }body {
+  font-family: 'Cairo', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+header {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+  font-size: 28px;
+  color: #ffd700;
+}
+
+.gallery {
+  padding: 100px 20px 60px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.media-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.media-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+img, video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.media-title {
+  background-color: #1e2a38;
+  color: #ffd700;
+  text-align: center;
+  padding: 12px;
+  font-size: 18px;
+}
+
+footer {
+  margin-top: 80px;
+  background-color: #111;
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 16px;
+  color: #ccc;
+  border-top: 2px solid #ffd700;
+}
+
+.footer-social {
+  margin-top: 12px;
+}
+
+.footer-social a {
+  color: #ffd700;
+  margin: 0 10px;
+  font-size: 24px;
+  transition: 0.3s;
+}
+
+.footer-social a:hover {
+  color: #fff;
+}
+
+section {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head><body>
+  <header>
+    <h1>XNXX</h1>
+  </header>  <section class="gallery">
+    <h2>معرض الوسائط</h2>
+    <div class="media-grid">
+      <div class="media-item">
+        <img src="٢٠٢٥٠٤٢١_١٧٠٢٢٦.jpg" alt="صورة 1">
+        <div class="media-title">صورة 1</div>
+      </div>
+      <div class="media-item">
+        <video controls>
+          <source src="VID_20250421_163803_350.mp4" type="video/mp4">
+        </video>
+        <div class="media-title">مقطع 1</div>
+      </div>
+      <!-- أضف المزيد من الصور والمقاطع من مستودع GitHub -->
+    </div>
+  </section>  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2025 - تصميم احترافي بواسطة @_ci7z</p>
+    <div class="footer-social">
+      <a href="https://instagram.com/_ci7z" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+</body></html>
