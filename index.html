@@ -241,3 +241,81 @@
 </footer>
 
 </html>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <title>لوحة التحكم</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f0f0;
+      padding: 30px;
+    }
+    .admin {
+      display: none;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .video-list {
+      margin-top: 20px;
+    }
+    .video-item {
+      background: #eee;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      background: #333;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #555;
+    }
+  </style>
+</head><body>
+  <h2>أدخل كلمة المرور لعرض لوحة التحكم</h2>
+  <input type="password" id="adminPass" placeholder="كلمة المرور">
+  <button onclick="checkPassword()">دخول</button>  <div class="admin" id="adminPanel">
+    <h2>لوحة التحكم</h2>
+    <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
+    <input type="text" id="videoUrl" placeholder="رابط الفيديو">
+    <button onclick="addVideo()">إضافة فيديو</button><div class="video-list" id="videoList"></div>
+
+  </div>  <script>
+    const correctPass = "12345"; // غيرها إلى كلمة سر سرية لك فقط
+
+    function checkPassword() {
+      const input = document.getElementById("adminPass").value;
+      if (input === correctPass) {
+        document.getElementById("adminPanel").style.display = "block";
+      } else {
+        alert("كلمة المرور خاطئة");
+      }
+    }
+
+    function addVideo() {
+      const title = document.getElementById("videoTitle").value;
+      const url = document.getElementById("videoUrl").value;
+      const list = document.getElementById("videoList");
+
+      const item = document.createElement("div");
+      item.className = "video-item";
+      item.innerHTML = `
+        <div>
+          <strong>${title}</strong><br>
+          <video controls width="300"><source src="${url}" type="video/mp4"></video>
+        </div>
+        <button onclick="this.parentElement.remove()">حذف</button>
+      `;
+      list.appendChild(item);
+    }
+  </script></body></html>
