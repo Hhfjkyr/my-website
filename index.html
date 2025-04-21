@@ -24,7 +24,6 @@
       color: inherit;
     }
 
-    /* الهيدر */
     .navbar {
       width: 100%;
       background-color: rgba(0, 0, 0, 0.3);
@@ -58,7 +57,6 @@
       background-color: #fff176;
     }
 
-    /* واجهة البداية */
     .welcome {
       height: 100vh;
       display: flex;
@@ -112,7 +110,6 @@
       }
     }
 
-    /* المحتوى */
     #mainContent {
       display: none;
       padding: 120px 20px 60px;
@@ -128,81 +125,57 @@
       text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
 
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .video-card {
+    .media-card {
       background-color: rgba(0, 0, 0, 0.3);
       border-radius: 16px;
       overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .video-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    }
-
-    video {
-      width: 100%;
-      display: block;
-    }
-
-    .video-title {
-      padding: 12px;
-      font-size: 18px;
-      background-color: #002d59;
-      color: #ffd700;
+      margin-bottom: 40px;
+      padding: 16px;
       text-align: center;
+    }
+
+    video, img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .media-title {
+      font-size: 20px;
+      color: #ffd700;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- واجهة البداية -->
   <div class="welcome" id="welcomeScreen">
     <div class="big-x">X</div>
     <div class="label">XNXX</div>
     <button class="enter-btn" onclick="enterSite()">دخول</button>
   </div>
 
-  <!-- شريط التنقل -->
   <div class="navbar" id="navbar" style="display: none;">
     <h1>XNXX</h1>
     <button onclick="scrollToVideos()">عرض المقاطع</button>
   </div>
 
-  <!-- المحتوى -->
   <div id="mainContent">
-    <h2>مقاطع الفيديو</h2>
-    <div class="video-grid">
-      <div class="video-card">
-        <video controls>
-          <source src="video1.mp4" type="video/mp4">
-        </video>
-        <div class="video-title">مقطع 1</div>
-      </div>
+    <h2>محتوى الموقع</h2>
 
-      <div class="video-card">
-        <video controls>
-          <source src="video2.mp4" type="video/mp4">
-        </video>
-
-        
-        <div class="video-title">مقطع 2</div>
-      </div>
-
-      <div class="video-card">
-        <video controls>
-          <source src="video3.mp4" type="video/mp4">
-        </video>
-        <div class="video-title">مقطع 3</div>
-      </div>
+    <div class="media-card">
+      <video controls>
+        <source src="VID_20250421_163803_350.mp4" type="video/mp4">
+        متصفحك لا يدعم عرض الفيديو.
+      </video>
+      <div class="media-title">فيديو مرفوع</div>
     </div>
+
+    <div class="media-card">
+      <img src="٢٠٢٥٠٤٢١_١٧٠٢٢٦.jpg" alt="صورة مرفوعة">
+      <div class="media-title">صورة مرفوعة</div>
+    </div>
+
   </div>
 
   <script>
@@ -223,15 +196,3 @@
 </body>
 
 </html>
-<h2>مقطع 1</h2>
-<video controls width="100%">
-  <source src="VID_20250421_163803_350.mp4" type="video/mp4">
-  المتصفح لا يدعم تشغيل الفيديو.
-</video>
-
-<h2>صورة</h2>
-<img src="٢٠٢٥٠٤٢١_١٧٠٢٢٦.jpg" alt="صورة مرفوعة" width="100%">
-<video controls>
-  <source src="VID_20250421_163803_350.mp4" type="video/mp4">
-  متصفحك لا يدعم عرض الفيديو.
-</video>
