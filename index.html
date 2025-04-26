@@ -2,108 +2,174 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XNXX - المقاطع والصور</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>_ci7z</title>
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
     body {
+      background-color: #121212;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #021B79, #0575E6);
       color: #fff;
       min-height: 100vh;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .navbar {
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.3);
-      padding: 20px 40px;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+    }
+    /* Navbar */
+    .navbar {
+      background-color: #1e1e1e;
+      padding: 15px 20px;
+      display: flex;
       align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff0000;
       position: fixed;
       top: 0;
+      width: 100%;
       z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     }
-
-    .navbar h1 {
-      font-size: 28px;
-      color: #ffd700;
-      letter-spacing: 1px;
-    }
-
-    .content-wrapper {
-      padding-top: 100px;
+    /* Content */
+    .content {
+      flex: 1;
+      padding: 90px 10px 70px; /* Space for navbar and bottom nav */
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
       max-width: 1200px;
       margin: auto;
     }
-
-    h2.section-title {
-      font-size: 36px;
-      margin: 40px 0 20px;
-      text-align: center;
-      color: #ffd700;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    .card {
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s;
     }
-
-    footer {
-      margin-top: 60px;
-      padding: 30px 20px;
-      background-color: rgba(0, 0, 0, 0.3);
-      text-align: center;
-      color: #ddd;
+    .card:hover {
+      transform: scale(1.02);
     }
-
-    footer a {
-      color: #ffd700;
-      margin: 0 10px;
+    .card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+    .card-info {
+      padding: 10px;
+      font-size: 14px;
+    }
+    .card-info h3 {
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: #fff;
+    }
+    .card-info p {
+      color: #bbb;
+      font-size: 12px;
+    }
+    /* Bottom Navigation */
+    .bottom-nav {
+      background-color: #1e1e1e;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 60px;
+      border-top: 1px solid #333;
+    }
+    .bottom-nav a {
+      text-decoration: none;
+      color: #ccc;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       transition: color 0.3s;
     }
-
-    footer a:hover {
-      color: #fff176;
+    .bottom-nav a:hover {
+      color: #ff0000;
     }
-
-    .instagram-icon {
-      width: 20px;
-      vertical-align: middle;
-      margin-left: 8px;
+    .bottom-nav i {
+      font-size: 20px;
+      margin-bottom: 5px;
     }
   </style>
+  <!-- Icons (fontawesome) -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 
+  <!-- Navbar -->
   <div class="navbar">
-    <h1>XNXX</h1>
+    _ci7z
   </div>
 
-  <div class="content-wrapper">
-    <h2 class="section-title">الصور</h2>
-
-    <iframe src="https://drive.google.com/embeddedfolderview?id=16zVrCQXpcNSccgznZfMF_THjO3wCx96c#grid"
-      style="width:100%; height:600px; border:0;"></iframe>
+  <!-- Content -->
+  <div class="content">
+    <!-- Card 1 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/300x140.png?text=Video+1" alt="Video 1">
+      <div class="card-info">
+        <h3>عنوان المقطع الأول</h3>
+        <p>مشاهدات: 7.2K | 100%</p>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/300x140.png?text=Video+2" alt="Video 2">
+      <div class="card-info">
+        <h3>عنوان المقطع الثاني</h3>
+        <p>مشاهدات: 5.5K | 98%</p>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/300x140.png?text=Video+3" alt="Video 3">
+      <div class="card-info">
+        <h3>عنوان المقطع الثالث</h3>
+        <p>مشاهدات: 8K | 97%</p>
+      </div>
+    </div>
+    <!-- Card 4 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/300x140.png?text=Video+4" alt="Video 4">
+      <div class="card-info">
+        <h3>عنوان المقطع الرابع</h3>
+        <p>مشاهدات: 4K | 95%</p>
+      </div>
+    </div>
+    <!-- Cards More ... -->
   </div>
 
-  <footer>
-    <p>جميع الحقوق محفوظة &copy; 2025 | تصميم احترافي بواسطة @_ci7z
-      <a href="https://instagram.com/_ci7z" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="instagram-icon" alt="Instagram">
-      </a>
-    </p>
-  </footer>
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <a href="#">
+      <i class="fas fa-home"></i>
+      Home
+    </a>
+    <a href="#">
+      <i class="fas fa-th"></i>
+      Categories
+    </a>
+    <a href="#">
+      <i class="fas fa-star"></i>
+      Pornstars
+    </a>
+    <a href="#">
+      <i class="fas fa-tv"></i>
+      Channels
+    </a>
+  </div>
 
 </body>
 </html>
-<div class="navbar">
-  <img src="https://drive.google.com/file/d/17WH0TvjsKtaw00jjLjzYEtaB_e1D-bE-/view?usp=drivesdk" alt="Logo" style="height: 40px; margin-left: 10px;">
-  <h1>XNXX</h1>
-</div>
