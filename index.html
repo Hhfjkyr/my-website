@@ -16,6 +16,7 @@
       --radius: 24px; /* زاوية الانحناء كبيرة لجعل الحواف بارزة */
       --shadow: rgba(0, 0, 0, 0.4); /* الظلال قوية لزيادة التأثير */
       --max-width: 400px; /* الحد الأقصى للعرض */
+      --height: 500px; /* تحديد الارتفاع الثابت للواجهة */
     }
 
     * {
@@ -44,9 +45,11 @@
       border-radius: var(--radius);
       width: 100%;
       max-width: var(--max-width);
+      height: var(--height);
       box-shadow: 0 8px 15px var(--shadow); /* زيادة تأثير الظل ليكون بارزًا */
       animation: fadeIn 0.8s ease-out;
       text-align: center;
+      overflow: hidden; /* منع التمرير */
     }
 
     .logo {
