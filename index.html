@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TikTok Verification</title>
+  <title>توثيق حساب TikTok</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -11,9 +11,9 @@
       --bg: #ffffff;
       --card-bg: #000000;
       --text: #ffffff;
-      --muted: #cccccc;
-      --border: #333333;
-      --radius: 16px;
+      --muted: #aaaaaa;
+      --radius: 18px;
+      --input-bg: #111111;
     }
 
     * {
@@ -29,57 +29,62 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      overflow: hidden;
     }
 
     .card {
       background-color: var(--card-bg);
-      color: var(--text);
       border-radius: var(--radius);
-      padding: 35px 30px;
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
-      max-width: 360px;
-      width: 100%;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+      padding: 40px 30px;
+      width: 360px;
       text-align: center;
     }
 
-    .logo {
-      width: 80px;
-      margin-bottom: 20px;
+    .card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
       border-radius: 12px;
+      margin-bottom: 20px;
     }
 
     h2 {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 10px;
+      font-size: 20px;
+      color: var(--text);
+      margin-bottom: 8px;
     }
 
     p {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--muted);
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     input {
       width: 100%;
       padding: 12px;
       margin-bottom: 15px;
-      border: 1px solid var(--border);
+      background-color: var(--input-bg);
+      border: none;
       border-radius: var(--radius);
-      background-color: #111;
       color: var(--text);
       font-size: 14px;
     }
 
+    input::placeholder {
+      color: #999;
+    }
+
     button {
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       background-color: var(--primary);
-      color: white;
-      font-weight: bold;
       border: none;
       border-radius: var(--radius);
+      color: white;
       font-size: 15px;
+      font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
     }
@@ -88,31 +93,26 @@
       background-color: #e60045;
     }
 
-    .verified-icon {
-      font-size: 28px;
-      margin-bottom: 15px;
-      color: var(--primary);
-    }
   </style>
 </head>
 <body>
   <div class="card">
-    <img class="logo" src="https://raw.githubusercontent.com/Hhfjkyr/my-website/main/537af08a11a116c157659081006036e7%20(1).png" alt="TikTok Logo">
-    <div class="verified-icon">✔️</div>
+    <img src="https://raw.githubusercontent.com/Hhfjkyr/my-website/main/537af08a11a116c157659081006036e7%20(1).png" alt="TikTok Logo">
     <h2>طلب توثيق الحساب</h2>
-    <p>املأ المعلومات التالية لتقديم طلب توثيق رسمي لحسابك على TikTok</p>
+    <p>قم بإدخال المعلومات المطلوبة أدناه لإرسال طلب التوثيق</p>
     <form id="verifyForm">
       <input type="text" placeholder="الاسم الكامل" required>
-      <input type="text" placeholder="اسم المستخدم في تيك توك" required>
+      <input type="text" placeholder="اسم المستخدم في TikTok" required>
       <input type="email" placeholder="البريد الإلكتروني" required>
-      <button type="submit">إرسال طلب التوثيق</button>
+      <input type="text" placeholder="رابط الحساب (اختياري)">
+      <button type="submit">إرسال الطلب</button>
     </form>
   </div>
 
   <script>
     document.getElementById("verifyForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      alert("تم إرسال طلبك بنجاح، سيتم مراجعته خلال 48 ساعة.");
+      alert("تم إرسال طلب التوثيق بنجاح. سنراجع طلبك خلال 48 ساعة.");
     });
   </script>
 </body>
