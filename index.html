@@ -3,222 +3,166 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TikTok Verification</title>
+  <title>Login | TikTok</title>
   <style>
     :root {
       --primary: #ff0050;
-      --bg: #f0f2f5;
-      --white: #fff;
+      --background: #f0f0f0;
+      --white: #ffffff;
       --text: #222;
-      --muted: #888;
-      --border: #ddd;
-      --success: #4CAF50;
-      --shadow: 0 10px 40px rgba(0,0,0,0.15);
+      --muted: #777;
+      --border: #ccc;
+      --success: #4caf50;
     }
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
       font-family: 'Segoe UI', Tahoma, sans-serif;
-      transition: all 0.3s ease;
     }
 
     body {
-      margin: 0;
-      padding: 40px 10px;
-      background: linear-gradient(135deg, #f9f9f9, #e6e6e6);
+      background: var(--background);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      animation: fadeInBody 1s ease forwards;
     }
 
-    @keyframes fadeInBody {
-      from { opacity: 0; transform: scale(0.98); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .form-wrapper {
+    .container {
       background: var(--white);
       width: 100%;
       max-width: 400px;
-      padding: 35px 30px;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      animation: slideUp 0.8s ease forwards;
+      padding: 40px 30px;
       border: 2px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 1s ease forwards;
     }
 
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(60px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .form-wrapper img {
-      width: 50px;
+    .logo {
       display: block;
       margin: 0 auto 20px;
+      width: 60px;
     }
 
-    .form-wrapper h2 {
+    h2 {
       text-align: center;
+      margin-bottom: 10px;
       font-size: 24px;
-      margin-bottom: 8px;
       color: var(--text);
     }
 
-    .form-wrapper p {
+    p {
       text-align: center;
       font-size: 13px;
       color: var(--muted);
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
 
     label {
-      display: block;
       font-size: 13px;
-      margin-bottom: 4px;
       color: var(--text);
+      margin-bottom: 5px;
+      display: block;
     }
 
     input {
       width: 100%;
-      padding: 11px 14px;
-      margin-bottom: 18px;
+      padding: 12px;
+      margin-bottom: 20px;
       border: 2px solid var(--border);
-      border-radius: 0;
-      background: #fefefe;
+      border-radius: 6px;
+      background: #fafafa;
       font-size: 14px;
-      transition: border 0.3s;
+      transition: border-color 0.3s ease;
     }
 
     input:focus {
-      outline: none;
       border-color: var(--primary);
       background: #fff;
+      outline: none;
     }
 
     button {
       width: 100%;
       padding: 13px;
-      background-color: var(--primary);
-      color: #fff;
-      font-size: 15px;
-      font-weight: bold;
       border: none;
+      border-radius: 6px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: bold;
+      font-size: 15px;
       cursor: pointer;
-      transition: 0.3s ease;
-      letter-spacing: 0.5px;
+      transition: background 0.3s ease;
     }
 
     button:hover {
-      background-color: #e00045;
-      transform: scale(1.02);
+      background: #e60045;
     }
 
-    .popup {
+    .success-msg {
       display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .popup-content {
-      background: #fff;
-      padding: 30px;
-      max-width: 600px;
-      width: 90%;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      animation: zoomIn 0.7s ease;
-    }
-
-    @keyframes zoomIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .popup-content h1 {
-      font-size: 24px;
-      color: var(--success);
-      margin-bottom: 20px;
-    }
-
-    .popup-content code {
-      background: #111;
-      color: #0f0;
-      padding: 20px;
-      display: block;
-      font-family: monospace;
-      font-size: 13px;
-      text-align: left;
-      border-radius: 8px;
-      overflow-x: auto;
-      white-space: pre-wrap;
-    }
-
-    .close-btn {
-      margin-top: 20px;
-      background: #ddd;
-      border: none;
-      padding: 10px 16px;
-      cursor: pointer;
+      margin-top: 25px;
+      padding: 15px;
+      background: var(--success);
+      color: white;
       font-size: 14px;
-      border-radius: 6px;
+      text-align: center;
+      border-radius: 8px;
+      animation: fadeIn 0.5s ease-in-out forwards;
     }
 
-    .close-btn:hover {
-      background: #ccc;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-  <div class="form-wrapper">
-    <img src="https://upload.wikimedia.org/wikipedia/en/6/69/TikTok_logo.svg" alt="TikTok Logo">
-    <h2>Account Verification</h2>
-    <p>Complete the form to request your verified badge.</p>
-    <form id="form">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" placeholder="John Doe" required>
+  <div class="container" id="formContainer">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/6/69/TikTok_logo.svg" alt="TikTok Logo">
+    <h2>Login to TikTok</h2>
+    <p>Access your dashboard and manage your content.</p>
 
-      <label for="user">Username</label>
-      <input type="text" id="user" placeholder="@yourusername" required>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Enter your username" required>
 
-      <label for="pass">Password</label>
-      <input type="password" id="pass" placeholder="••••••••" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
 
-      <label for="dob">Date of Birth</label>
-      <input type="date" id="dob" required>
-
-      <button type="submit">Submit Request</button>
+      <button type="submit">Log In</button>
     </form>
-  </div>
 
-  <div class="popup" id="popup">
-    <div class="popup-content">
-      <h1>Account Verified</h1>
-      <code>
-const verified = true;
-const user = "@yourusername";
-const message = "Your TikTok account has been successfully verified.";
-console.log(message);
-alert("تم توثيق الحساب بنجاح! سيتم مراجعة البيانات خلال 3 أيام.");
-      </code>
-      <button class="close-btn" onclick="document.getElementById('popup').style.display='none'">Close</button>
+    <div class="success-msg" id="successMsg">
+      Welcome back! You’ve logged in successfully.
     </div>
   </div>
 
   <script>
-    document.getElementById("form").addEventListener("submit", function(e) {
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      document.getElementById("popup").style.display = "flex";
+
+      // إخفاء النموذج
+      document.getElementById('loginForm').style.display = 'none';
+
+      // إظهار رسالة النجاح
+      const msg = document.getElementById('successMsg');
+      msg.style.display = 'block';
     });
   </script>
 </body>
