@@ -14,8 +14,8 @@
       --border: #ddd;
       --success-bg: #4CAF50;
       --hover-bg: #e60045;
-      --btn-radius: 10px;
-      --transition-time: 0.3s;
+      --btn-radius: 12px;
+      --transition-time: 0.4s;
     }
 
     * {
@@ -25,36 +25,34 @@
 
     body {
       margin: 0;
-      padding: 0;
+      padding: 40px 10px;
       background-color: var(--background);
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
+      align-items: flex-start;
+      min-height: 100vh;
     }
 
     .form-wrapper {
       width: 100%;
-      max-width: 420px;
+      max-width: 450px;
       background: #fff;
       padding: 40px 30px;
-      border-radius: 18px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-      transform: translateY(50px);
-      opacity: 0;
-      animation: fadeInUp 1s forwards;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 15px 60px rgba(0,0,0,0.1);
+      animation: fadeInUp 1s ease forwards;
     }
 
     .form-wrapper img {
       width: 60px;
       display: block;
-      margin: 0 auto 10px;
+      margin: 0 auto 15px;
     }
 
     .form-wrapper h2 {
       text-align: center;
-      font-size: 22px;
+      font-size: 24px;
       margin-bottom: 8px;
       color: var(--text);
     }
@@ -70,8 +68,8 @@
       font-size: 14px;
       color: var(--text);
       display: block;
-      margin-bottom: 6px;
       margin-top: 16px;
+      margin-bottom: 6px;
     }
 
     input {
@@ -81,28 +79,29 @@
       border-radius: var(--btn-radius);
       background-color: var(--input-bg);
       font-size: 14px;
-      transition: 0.3s;
-      margin-bottom: 16px;
+      transition: var(--transition-time);
+      margin-bottom: 8px;
     }
 
     input:focus {
       outline: none;
       border-color: var(--primary);
       background-color: #fff;
+      box-shadow: 0 0 0 3px rgba(255, 0, 80, 0.1);
     }
 
     button {
-      margin-top: 30px;
+      margin-top: 25px;
       width: 100%;
       background-color: var(--primary);
       color: #fff;
       border: none;
       border-radius: var(--btn-radius);
-      padding: 13px;
-      font-size: 15px;
+      padding: 14px;
+      font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background var(--transition-time);
     }
 
     button:hover {
@@ -112,7 +111,7 @@
     #confirmationMessage {
       display: none;
       margin-top: 30px;
-      padding: 12px;
+      padding: 14px;
       background-color: var(--success-bg);
       color: white;
       border-radius: var(--btn-radius);
@@ -120,7 +119,8 @@
       text-align: center;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 1s, transform 1s;
+      transition: opacity 0.8s, transform 0.8s;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
     .note {
@@ -130,11 +130,10 @@
       margin-top: 20px;
     }
 
-    /* Keyframe animations */
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(50px);
+        transform: translateY(40px);
       }
       to {
         opacity: 1;
@@ -145,6 +144,7 @@
     @media (max-width: 480px) {
       .form-wrapper {
         padding: 25px 20px;
+        margin-top: 20px;
       }
     }
   </style>
@@ -177,14 +177,14 @@
     document.getElementById('verificationForm').addEventListener('submit', function(event) {
       event.preventDefault();
 
-      // إخفاء النموذج بعد الإرسال مع تأثير الظهور
-      document.querySelector('.form-wrapper').style.display = 'none';
-
-      // عرض رسالة التأكيد مع تأثير الظهور
+      const formWrapper = document.querySelector('.form-wrapper');
       const confirmationMessage = document.getElementById('confirmationMessage');
+
+      // إخفاء الفورم تدريجياً
+      formWrapper.querySelector('form').style.display = 'none';
+
+      // عرض رسالة التوثيق بتأثير
       confirmationMessage.style.display = 'block';
-      
-      // إضافة التأثيرات بعد تأخير بسيط
       setTimeout(() => {
         confirmationMessage.style.opacity = 1;
         confirmationMessage.style.transform = 'translateY(0)';
