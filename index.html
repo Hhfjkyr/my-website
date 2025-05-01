@@ -7,13 +7,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #ff0050; /* اللون الرئيسي */
-      --bg: #121212; /* الخلفية الداكنة */
-      --text: #ffffff; /* النص الأبيض */
-      --muted: #bbbbbb; /* النص الباهت */
-      --input-bg: #1e1e1e; /* خلفية المدخلات */
-      --border: #333; /* حدود المدخلات */
-      --border-radius: 15px; /* الزوايا المنحنية */
+      --primary: #ff0050;
+      --bg: #121212;
+      --text: #ffffff;
+      --muted: #bbbbbb;
+      --input-bg: #1e1e1e;
+      --border: #333;
+      --border-radius: 15px;
     }
 
     * {
@@ -31,7 +31,6 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      overflow: hidden;
     }
 
     .container {
@@ -105,15 +104,40 @@
       transform: translateY(-2px);
     }
 
+    button:active {
+      transform: scale(0.98);
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      input {
+        padding: 12px;
+        font-size: 14px;
+      }
+
+      button {
+        font-size: 15px;
+        padding: 12px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img class="logo" src="https://seeklogo.com/images/T/tiktok-logo-1F4A5DCD45-seeklogo.com.png" alt="TikTok Logo">
+    <!-- تأكد من رفع الصورة داخل مجلد assets -->
+    <img class="logo" src="assets/tiktok-logo.png" alt="TikTok Logo">
     <h2>Log in to TikTok</h2>
     <p>Access your account with your credentials</p>
     <form id="loginForm">
@@ -126,10 +150,8 @@
 
   <script>
     const form = document.getElementById('loginForm');
-
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      // Redirecting to TikTok login page
       window.location.href = 'https://www.tiktok.com/login';
     });
   </script>
