@@ -15,8 +15,7 @@
       --highlight: #00c6ff; /* اللون المميز للأزرار */
       --radius: 24px; /* زاوية الانحناء كبيرة لجعل الحواف بارزة */
       --shadow: rgba(0, 0, 0, 0.4); /* الظلال قوية لزيادة التأثير */
-      --max-width: 400px; /* الحد الأقصى للعرض */
-      --height: 500px; /* تحديد الارتفاع الثابت للواجهة */
+      --size: 350px; /* عرض وارتفاع الواجهة المربع */
     }
 
     * {
@@ -41,11 +40,10 @@
     .container {
       background-color: #181818; /* اللون الخلفي للواجهة */
       border: 3px solid var(--border); /* زيادة سمك الحدود لجعلها بارزة */
-      padding: 40px;
+      padding: 20px;
       border-radius: var(--radius);
-      width: 100%;
-      max-width: var(--max-width);
-      height: var(--height);
+      width: var(--size);
+      height: var(--size); /* الحجم الثابت والمربع */
       box-shadow: 0 8px 15px var(--shadow); /* زيادة تأثير الظل ليكون بارزًا */
       animation: fadeIn 0.8s ease-out;
       text-align: center;
@@ -55,26 +53,26 @@
     .logo {
       display: block;
       margin: 0 auto 30px;
-      width: 120px;
+      width: 80px;
     }
 
     h2 {
-      font-size: 26px;
+      font-size: 20px;
       font-weight: 600;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       color: var(--text);
     }
 
     p {
-      font-size: 16px;
+      font-size: 12px;
       color: var(--text);
-      margin-bottom: 25px;
+      margin-bottom: 15px;
     }
 
     input {
       width: 100%;
       padding: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       background-color: var(--input-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -94,7 +92,7 @@
       background-color: var(--highlight);
       color: #fff;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 14px;
       border: none;
       border-radius: var(--radius);
       cursor: pointer;
@@ -107,9 +105,9 @@
     }
 
     .footer-text {
-      font-size: 12px;
+      font-size: 10px;
       color: var(--text);
-      margin-top: 20px;
+      margin-top: 15px;
     }
 
     @keyframes fadeIn {
