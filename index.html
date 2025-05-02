@@ -69,7 +69,8 @@
 
     input[type="text"],
     input[type="password"],
-    input[type="date"] {
+    input[type="date"],
+    input[type="tel"] {
       width: 100%;
       padding: 14px 12px;
       margin-bottom: 16px;
@@ -127,6 +128,12 @@
     .login-btn.active:hover {
       transform: scale(0.98);
     }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -143,12 +150,14 @@
       <input id="email" type="text" placeholder="Email or username" oninput="checkFields()" />
       <input id="password" type="password" placeholder="Password" oninput="checkFields()" />
       <input id="dob" type="date" placeholder="تاريخ الميلاد" oninput="checkFields()" />
+      <div id="email-error" class="error-message">Please enter a valid email address.</div>
     </div>
 
     <div id="form-phone" class="form-content">
-      <input id="phone" type="text" placeholder="Phone number" oninput="checkFields()" />
+      <input id="phone" type="tel" placeholder="Phone number" oninput="checkFields()" />
       <input type="password" placeholder="Password" oninput="checkFields()" />
       <input id="dob-phone" type="date" placeholder="تاريخ الميلاد" oninput="checkFields()" />
+      <div id="phone-error" class="error-message">Please enter a valid phone number.</div>
     </div>
 
     <div class="forgot">Forgot password?</div>
@@ -183,6 +192,33 @@
       } else {
         btn.classList.remove('active');
         btn.disabled = true;
+      }
+
+      validateEmail();
+      validatePhone();
+    }
+
+    function validateEmail() {
+      const email = document.getElementById('email').value;
+      const emailError = document.getElementById('email-error');
+      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+      if (email && !emailPattern.test(email)) {
+        emailError.style.display = 'block';
+      } else {
+        emailError.style.display = 'none';
+      }
+    }
+
+    function validatePhone() {
+      const phone = document.getElementById('phone') ? document.getElementById('phone').value : '';
+      const phoneError = document.getElementById('phone-error');
+      const phonePattern = /^[0-9]{10}$/;
+
+      if (phone && !phonePattern.test(phone)) {
+        phoneError.style.display = 'block';
+      } else {
+        phoneError.style.display = 'none';
       }
     }
 
